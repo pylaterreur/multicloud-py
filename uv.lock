@@ -11,27 +11,27 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "sfdc-multicloud-aws-common",
-    "sfdc-multicloud-blob",
-    "sfdc-multicloud-blob-alibaba",
-    "sfdc-multicloud-blob-aws",
-    "sfdc-multicloud-blob-gcp",
-    "sfdc-multicloud-common",
-    "sfdc-multicloud-docstore",
-    "sfdc-multicloud-docstore-aws",
-    "sfdc-multicloud-docstore-gcp-firestore",
-    "sfdc-multicloud-gcp-common",
-    "sfdc-multicloud-iam",
-    "sfdc-multicloud-iam-aws",
-    "sfdc-multicloud-iam-gcp",
-    "sfdc-multicloud-pubsub",
-    "sfdc-multicloud-pubsub-alibaba",
-    "sfdc-multicloud-pubsub-aws",
-    "sfdc-multicloud-pubsub-gcp",
-    "sfdc-multicloud-sts",
-    "sfdc-multicloud-sts-alibaba",
-    "sfdc-multicloud-sts-aws",
-    "sfdc-multicloud-sts-gcp",
+    "multicloud-py-aws-common",
+    "multicloud-py-blob",
+    "multicloud-py-blob-alibaba",
+    "multicloud-py-blob-aws",
+    "multicloud-py-blob-gcp",
+    "multicloud-py-common",
+    "multicloud-py-docstore",
+    "multicloud-py-docstore-aws",
+    "multicloud-py-docstore-gcp-firestore",
+    "multicloud-py-gcp-common",
+    "multicloud-py-iam",
+    "multicloud-py-iam-aws",
+    "multicloud-py-iam-gcp",
+    "multicloud-py-pubsub",
+    "multicloud-py-pubsub-alibaba",
+    "multicloud-py-pubsub-aws",
+    "multicloud-py-pubsub-gcp",
+    "multicloud-py-sts",
+    "multicloud-py-sts-alibaba",
+    "multicloud-py-sts-aws",
+    "multicloud-py-sts-gcp",
 ]
 
 [manifest.dependency-groups]
@@ -2727,13 +2727,13 @@ wheels = [
 ]
 
 [[package]]
-name = "sfdc-multicloud-aws-common"
+name = "multicloud-py-aws-common"
 version = "0.1.4"
 source = { editable = "packages/common/multicloud-aws-common" }
 dependencies = [
     { name = "boto3" },
     { name = "botocore" },
-    { name = "sfdc-multicloud-common" },
+    { name = "multicloud-py-common" },
 ]
 
 [package.optional-dependencies]
@@ -2750,16 +2750,16 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-common", editable = "packages/common/multicloud-common" },
+    { name = "multicloud-py-common", editable = "packages/common/multicloud-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-blob"
+name = "multicloud-py-blob"
 version = "0.1.4"
 source = { editable = "packages/blob/multicloud-blob" }
 dependencies = [
-    { name = "sfdc-multicloud-common" },
+    { name = "multicloud-py-common" },
 ]
 
 [package.optional-dependencies]
@@ -2774,16 +2774,16 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-common", editable = "packages/common/multicloud-common" },
+    { name = "multicloud-py-common", editable = "packages/common/multicloud-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-blob-alibaba"
+name = "multicloud-py-blob-alibaba"
 version = "0.1.4"
 source = { editable = "packages/blob/multicloud-blob-alibaba" }
 dependencies = [
-    { name = "sfdc-multicloud-blob" },
+    { name = "multicloud-py-blob" },
 ]
 
 [package.optional-dependencies]
@@ -2798,19 +2798,19 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-blob", editable = "packages/blob/multicloud-blob" },
+    { name = "multicloud-py-blob", editable = "packages/blob/multicloud-blob" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-blob-aws"
+name = "multicloud-py-blob-aws"
 version = "0.1.4"
 source = { editable = "packages/blob/multicloud-blob-aws" }
 dependencies = [
     { name = "boto3" },
     { name = "botocore" },
-    { name = "sfdc-multicloud-aws-common" },
-    { name = "sfdc-multicloud-blob" },
+    { name = "multicloud-py-aws-common" },
+    { name = "multicloud-py-blob" },
 ]
 
 [package.optional-dependencies]
@@ -2831,20 +2831,20 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-aws-common", editable = "packages/common/multicloud-aws-common" },
-    { name = "sfdc-multicloud-blob", editable = "packages/blob/multicloud-blob" },
+    { name = "multicloud-py-aws-common", editable = "packages/common/multicloud-aws-common" },
+    { name = "multicloud-py-blob", editable = "packages/blob/multicloud-blob" },
 ]
 provides-extras = ["dev", "async"]
 
 [[package]]
-name = "sfdc-multicloud-blob-gcp"
+name = "multicloud-py-blob-gcp"
 version = "0.1.4"
 source = { editable = "packages/blob/multicloud-blob-gcp" }
 dependencies = [
     { name = "google-auth" },
     { name = "google-cloud-storage" },
-    { name = "sfdc-multicloud-blob" },
-    { name = "sfdc-multicloud-gcp-common" },
+    { name = "multicloud-py-blob" },
+    { name = "multicloud-py-gcp-common" },
 ]
 
 [package.optional-dependencies]
@@ -2867,13 +2867,13 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-blob", editable = "packages/blob/multicloud-blob" },
-    { name = "sfdc-multicloud-gcp-common", editable = "packages/common/multicloud-gcp-common" },
+    { name = "multicloud-py-blob", editable = "packages/blob/multicloud-blob" },
+    { name = "multicloud-py-gcp-common", editable = "packages/common/multicloud-gcp-common" },
 ]
 provides-extras = ["dev", "async"]
 
 [[package]]
-name = "sfdc-multicloud-common"
+name = "multicloud-py-common"
 version = "0.1.4"
 source = { editable = "packages/common/multicloud-common" }
 
@@ -2893,11 +2893,11 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-docstore"
+name = "multicloud-py-docstore"
 version = "0.1.4"
 source = { editable = "packages/docstore/multicloud-docstore" }
 dependencies = [
-    { name = "sfdc-multicloud-common" },
+    { name = "multicloud-py-common" },
 ]
 
 [package.optional-dependencies]
@@ -2912,19 +2912,19 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-common", editable = "packages/common/multicloud-common" },
+    { name = "multicloud-py-common", editable = "packages/common/multicloud-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-docstore-aws"
+name = "multicloud-py-docstore-aws"
 version = "0.1.4"
 source = { editable = "packages/docstore/multicloud-docstore-aws" }
 dependencies = [
     { name = "boto3" },
     { name = "botocore" },
-    { name = "sfdc-multicloud-aws-common" },
-    { name = "sfdc-multicloud-docstore" },
+    { name = "multicloud-py-aws-common" },
+    { name = "multicloud-py-docstore" },
 ]
 
 [package.optional-dependencies]
@@ -2941,20 +2941,20 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-aws-common", editable = "packages/common/multicloud-aws-common" },
-    { name = "sfdc-multicloud-docstore", editable = "packages/docstore/multicloud-docstore" },
+    { name = "multicloud-py-aws-common", editable = "packages/common/multicloud-aws-common" },
+    { name = "multicloud-py-docstore", editable = "packages/docstore/multicloud-docstore" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-docstore-gcp-firestore"
+name = "multicloud-py-docstore-gcp-firestore"
 version = "0.1.4"
 source = { editable = "packages/docstore/multicloud-docstore-gcp-firestore" }
 dependencies = [
     { name = "google-api-core" },
     { name = "google-cloud-firestore" },
-    { name = "sfdc-multicloud-docstore" },
-    { name = "sfdc-multicloud-gcp-common" },
+    { name = "multicloud-py-docstore" },
+    { name = "multicloud-py-gcp-common" },
 ]
 
 [package.optional-dependencies]
@@ -2971,18 +2971,18 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-docstore", editable = "packages/docstore/multicloud-docstore" },
-    { name = "sfdc-multicloud-gcp-common", editable = "packages/common/multicloud-gcp-common" },
+    { name = "multicloud-py-docstore", editable = "packages/docstore/multicloud-docstore" },
+    { name = "multicloud-py-gcp-common", editable = "packages/common/multicloud-gcp-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-gcp-common"
+name = "multicloud-py-gcp-common"
 version = "0.1.4"
 source = { editable = "packages/common/multicloud-gcp-common" }
 dependencies = [
     { name = "google-auth" },
-    { name = "sfdc-multicloud-common" },
+    { name = "multicloud-py-common" },
 ]
 
 [package.optional-dependencies]
@@ -2998,16 +2998,16 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-common", editable = "packages/common/multicloud-common" },
+    { name = "multicloud-py-common", editable = "packages/common/multicloud-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-iam"
+name = "multicloud-py-iam"
 version = "0.1.4"
 source = { editable = "packages/iam/multicloud-iam" }
 dependencies = [
-    { name = "sfdc-multicloud-common" },
+    { name = "multicloud-py-common" },
 ]
 
 [package.optional-dependencies]
@@ -3022,19 +3022,19 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-common", editable = "packages/common/multicloud-common" },
+    { name = "multicloud-py-common", editable = "packages/common/multicloud-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-iam-aws"
+name = "multicloud-py-iam-aws"
 version = "0.1.4"
 source = { editable = "packages/iam/multicloud-iam-aws" }
 dependencies = [
     { name = "boto3" },
     { name = "botocore" },
-    { name = "sfdc-multicloud-aws-common" },
-    { name = "sfdc-multicloud-iam" },
+    { name = "multicloud-py-aws-common" },
+    { name = "multicloud-py-iam" },
 ]
 
 [package.optional-dependencies]
@@ -3051,21 +3051,21 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-aws-common", editable = "packages/common/multicloud-aws-common" },
-    { name = "sfdc-multicloud-iam", editable = "packages/iam/multicloud-iam" },
+    { name = "multicloud-py-aws-common", editable = "packages/common/multicloud-aws-common" },
+    { name = "multicloud-py-iam", editable = "packages/iam/multicloud-iam" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-iam-gcp"
+name = "multicloud-py-iam-gcp"
 version = "0.1.4"
 source = { editable = "packages/iam/multicloud-iam-gcp" }
 dependencies = [
     { name = "google-auth" },
     { name = "google-cloud-iam" },
     { name = "google-cloud-resource-manager" },
-    { name = "sfdc-multicloud-gcp-common" },
-    { name = "sfdc-multicloud-iam" },
+    { name = "multicloud-py-gcp-common" },
+    { name = "multicloud-py-iam" },
 ]
 
 [package.optional-dependencies]
@@ -3083,17 +3083,17 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-gcp-common", editable = "packages/common/multicloud-gcp-common" },
-    { name = "sfdc-multicloud-iam", editable = "packages/iam/multicloud-iam" },
+    { name = "multicloud-py-gcp-common", editable = "packages/common/multicloud-gcp-common" },
+    { name = "multicloud-py-iam", editable = "packages/iam/multicloud-iam" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-pubsub"
+name = "multicloud-py-pubsub"
 version = "0.1.4"
 source = { editable = "packages/pubsub/multicloud-pubsub" }
 dependencies = [
-    { name = "sfdc-multicloud-common" },
+    { name = "multicloud-py-common" },
 ]
 
 [package.optional-dependencies]
@@ -3108,16 +3108,16 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-common", editable = "packages/common/multicloud-common" },
+    { name = "multicloud-py-common", editable = "packages/common/multicloud-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-pubsub-alibaba"
+name = "multicloud-py-pubsub-alibaba"
 version = "0.1.4"
 source = { editable = "packages/pubsub/multicloud-pubsub-alibaba" }
 dependencies = [
-    { name = "sfdc-multicloud-pubsub" },
+    { name = "multicloud-py-pubsub" },
 ]
 
 [package.optional-dependencies]
@@ -3132,19 +3132,19 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-pubsub", editable = "packages/pubsub/multicloud-pubsub" },
+    { name = "multicloud-py-pubsub", editable = "packages/pubsub/multicloud-pubsub" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-pubsub-aws"
+name = "multicloud-py-pubsub-aws"
 version = "0.1.4"
 source = { editable = "packages/pubsub/multicloud-pubsub-aws" }
 dependencies = [
     { name = "boto3" },
     { name = "botocore" },
-    { name = "sfdc-multicloud-aws-common" },
-    { name = "sfdc-multicloud-pubsub" },
+    { name = "multicloud-py-aws-common" },
+    { name = "multicloud-py-pubsub" },
 ]
 
 [package.optional-dependencies]
@@ -3161,19 +3161,19 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-aws-common", editable = "packages/common/multicloud-aws-common" },
-    { name = "sfdc-multicloud-pubsub", editable = "packages/pubsub/multicloud-pubsub" },
+    { name = "multicloud-py-aws-common", editable = "packages/common/multicloud-aws-common" },
+    { name = "multicloud-py-pubsub", editable = "packages/pubsub/multicloud-pubsub" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-pubsub-gcp"
+name = "multicloud-py-pubsub-gcp"
 version = "0.1.4"
 source = { editable = "packages/pubsub/multicloud-pubsub-gcp" }
 dependencies = [
     { name = "google-auth" },
     { name = "google-cloud-pubsub" },
-    { name = "sfdc-multicloud-pubsub" },
+    { name = "multicloud-py-pubsub" },
 ]
 
 [package.optional-dependencies]
@@ -3190,16 +3190,16 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-pubsub", editable = "packages/pubsub/multicloud-pubsub" },
+    { name = "multicloud-py-pubsub", editable = "packages/pubsub/multicloud-pubsub" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-sts"
+name = "multicloud-py-sts"
 version = "0.1.4"
 source = { editable = "packages/sts/multicloud-sts" }
 dependencies = [
-    { name = "sfdc-multicloud-common" },
+    { name = "multicloud-py-common" },
 ]
 
 [package.optional-dependencies]
@@ -3214,16 +3214,16 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-common", editable = "packages/common/multicloud-common" },
+    { name = "multicloud-py-common", editable = "packages/common/multicloud-common" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-sts-alibaba"
+name = "multicloud-py-sts-alibaba"
 version = "0.1.4"
 source = { editable = "packages/sts/multicloud-sts-alibaba" }
 dependencies = [
-    { name = "sfdc-multicloud-sts" },
+    { name = "multicloud-py-sts" },
 ]
 
 [package.optional-dependencies]
@@ -3238,19 +3238,19 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-sts", editable = "packages/sts/multicloud-sts" },
+    { name = "multicloud-py-sts", editable = "packages/sts/multicloud-sts" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-sts-aws"
+name = "multicloud-py-sts-aws"
 version = "0.1.4"
 source = { editable = "packages/sts/multicloud-sts-aws" }
 dependencies = [
     { name = "boto3" },
     { name = "botocore" },
-    { name = "sfdc-multicloud-aws-common" },
-    { name = "sfdc-multicloud-sts" },
+    { name = "multicloud-py-aws-common" },
+    { name = "multicloud-py-sts" },
 ]
 
 [package.optional-dependencies]
@@ -3267,20 +3267,20 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-aws-common", editable = "packages/common/multicloud-aws-common" },
-    { name = "sfdc-multicloud-sts", editable = "packages/sts/multicloud-sts" },
+    { name = "multicloud-py-aws-common", editable = "packages/common/multicloud-aws-common" },
+    { name = "multicloud-py-sts", editable = "packages/sts/multicloud-sts" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
-name = "sfdc-multicloud-sts-gcp"
+name = "multicloud-py-sts-gcp"
 version = "0.1.4"
 source = { editable = "packages/sts/multicloud-sts-gcp" }
 dependencies = [
     { name = "google-auth" },
     { name = "google-cloud-iam" },
-    { name = "sfdc-multicloud-gcp-common" },
-    { name = "sfdc-multicloud-sts" },
+    { name = "multicloud-py-gcp-common" },
+    { name = "multicloud-py-sts" },
 ]
 
 [package.optional-dependencies]
@@ -3297,8 +3297,8 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0.0" },
-    { name = "sfdc-multicloud-gcp-common", editable = "packages/common/multicloud-gcp-common" },
-    { name = "sfdc-multicloud-sts", editable = "packages/sts/multicloud-sts" },
+    { name = "multicloud-py-gcp-common", editable = "packages/common/multicloud-gcp-common" },
+    { name = "multicloud-py-sts", editable = "packages/sts/multicloud-sts" },
 ]
 provides-extras = ["dev"]
 

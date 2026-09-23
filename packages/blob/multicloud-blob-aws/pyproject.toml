@@ -3,7 +3,7 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sfdc-multicloud-blob-aws"
+name = "multicloud-py-blob-aws"
 version = "0.1.4"
 license = "Apache-2.0"
 description = "AWS S3 provider for multicloud-blob."
@@ -14,8 +14,8 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "sfdc-multicloud-blob>=0.1.4",
-    "sfdc-multicloud-aws-common>=0.1.4",
+    "multicloud-py-blob>=0.1.4",
+    "multicloud-py-aws-common>=0.1.4",
     # botocore 1.35.69 is the first release whose bundled S3 model accepts the
     # PutObject IfMatch parameter (IfNoneMatch landed earlier, in 1.35.7). Since
     # conditional writes here use both, the floor is the later of the two.

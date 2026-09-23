@@ -33,9 +33,9 @@ Three-layer pattern (per service):
 ```
 packages/                                  # uv workspace — one directory per publishable distribution
 ├── common/
-│   ├── multicloud-common/                 #   sfdc-multicloud-common: exceptions + ProviderRegistry + Provider ABC
-│   ├── multicloud-aws-common/             #   sfdc-multicloud-aws-common: shared AWS/boto3 helpers
-│   └── multicloud-gcp-common/             #   sfdc-multicloud-gcp-common: shared GCP helpers
+│   ├── multicloud-common/                 #   multicloud-py-common: exceptions + ProviderRegistry + Provider ABC
+│   ├── multicloud-aws-common/             #   multicloud-py-aws-common: shared AWS/boto3 helpers
+│   └── multicloud-gcp-common/             #   multicloud-py-gcp-common: shared GCP helpers
 ├── blob/                                  # Blob storage service
 │   ├── multicloud-blob/                   #   Cloud-agnostic API (BucketClient + BaseBlobStore, sync + async)
 │   ├── multicloud-blob-aws/               #   AWS S3 implementation
@@ -102,44 +102,44 @@ examples/
 ## Installation
 
 The SDK ships as multiple distributions sharing the `multicloud.*` namespace,
-modeled on the Azure SDK for Python. Distributions publish under the `sfdc-`
-prefix; the **import namespace stays `multicloud.*`**
+modeled on the Azure SDK for Python. Distributions publish under the
+`multicloud-py-` prefix; the **import namespace stays `multicloud.*`**
 regardless of which distribution you install. Install only the service +
 provider you need; transitive dependencies (the cloud-agnostic client +
-`sfdc-multicloud-common`, plus any shared provider-common package) are pulled
+`multicloud-py-common`, plus any shared provider-common package) are pulled
 in automatically.
 
 ### From PyPI (Not Available Yet)
 
 ```bash
-# Blob storage on AWS — installs sfdc-multicloud-blob-aws + sfdc-multicloud-blob + sfdc-multicloud-common + boto3
-pip install sfdc-multicloud-blob-aws
+# Blob storage on AWS — installs multicloud-py-blob-aws + multicloud-py-blob + multicloud-py-common + boto3
+pip install multicloud-py-blob-aws
 
 # Blob storage on GCP
-pip install sfdc-multicloud-blob-gcp
+pip install multicloud-py-blob-gcp
 
 # Mix and match: AWS for blob, GCP for the Firestore document store
-pip install sfdc-multicloud-blob-aws sfdc-multicloud-docstore-gcp-firestore
+pip install multicloud-py-blob-aws multicloud-py-docstore-gcp-firestore
 ```
 
 Available distributions:
 
 | Distribution | Pulls in |
 |---|---|
-| `sfdc-multicloud-blob-aws` / `-blob-gcp` | Blob storage backed by S3 / GCS |
-| `sfdc-multicloud-sts-aws` / `-sts-gcp` | Security Token Service (AWS STS / GCP) |
-| `sfdc-multicloud-iam-aws` / `-iam-gcp` | Identity (IAM) management |
-| `sfdc-multicloud-docstore-aws` / `-docstore-gcp-firestore` | Document store backed by DynamoDB / Firestore |
-| `sfdc-multicloud-pubsub-aws` / `-pubsub-gcp` | Publish/subscribe backed by SNS-SQS / Pub-Sub |
+| `multicloud-py-blob-aws` / `-blob-gcp` | Blob storage backed by S3 / GCS |
+| `multicloud-py-sts-aws` / `-sts-gcp` | Security Token Service (AWS STS / GCP) |
+| `multicloud-py-iam-aws` / `-iam-gcp` | Identity (IAM) management |
+| `multicloud-py-docstore-aws` / `-docstore-gcp-firestore` | Document store backed by DynamoDB / Firestore |
+| `multicloud-py-pubsub-aws` / `-pubsub-gcp` | Publish/subscribe backed by SNS-SQS / Pub-Sub |
 
-The Alibaba Cloud distributions — `sfdc-multicloud-blob-alibaba`,
-`sfdc-multicloud-sts-alibaba`, and `sfdc-multicloud-pubsub-alibaba` — are
+The Alibaba Cloud distributions — `multicloud-py-blob-alibaba`,
+`multicloud-py-sts-alibaba`, and `multicloud-py-pubsub-alibaba` — are
 **placeholder packages** (distribution name reserved, implementation pending).
 Installing one registers no provider yet, so the client raises
 `No provider registered`. See the Services table above (`⌛` = Planned) for
 per-provider status.
 
-The shared `sfdc-multicloud-aws-common` / `-gcp-common` packages are pulled in
+The shared `multicloud-py-aws-common` / `-gcp-common` packages are pulled in
 transitively by the provider distributions; you don't install them directly.
 
 A blob-only AWS deployment lands `boto3` only — no GCP or Alibaba SDKs on

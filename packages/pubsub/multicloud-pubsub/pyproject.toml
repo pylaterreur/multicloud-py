@@ -3,7 +3,7 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sfdc-multicloud-pubsub"
+name = "multicloud-py-pubsub"
 version = "0.1.4"
 license = "Apache-2.0"
 description = "Cloud-agnostic pub/sub client for the python-multicloud SDK. Pair with a provider package (multicloud-pubsub-aws / -gcp / -alibaba) for actual cloud calls."
@@ -14,7 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "sfdc-multicloud-common>=0.1.4",
+    "multicloud-py-common>=0.1.4",
 ]
 
 [project.urls]

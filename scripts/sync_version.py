@@ -2,11 +2,11 @@
 """Propagate the root VERSION file to every distribution's pyproject.toml.
 
 The repo's source of truth for the SDK version is the top-level ``VERSION``
-file. Each of the 18 distributions in ``packages/*/*/pyproject.toml`` must
+file. Each of the 21 distributions in ``packages/*/*/pyproject.toml`` must
 declare that same version twice over:
 
   1. Its own ``project.version`` line.
-  2. Every ``sfdc-multicloud-*>=X.Y.Z`` inter-distribution dependency pin
+  2. Every ``multicloud-py-*>=X.Y.Z`` inter-distribution dependency pin
      in its ``project.dependencies`` list.
 
 Setuptools' ``[tool.setuptools.dynamic]`` cannot read files outside the
@@ -49,9 +49,9 @@ PACKAGES_GLOB = "packages/*/*/pyproject.toml"
 # Matches ``version = "0.1.0"`` on its own line under ``[project]``.
 PROJECT_VERSION_RE = re.compile(r'^version\s*=\s*"([^"]+)"\s*$', re.MULTILINE)
 
-# Matches ``"sfdc-multicloud-<name>>=0.1.0"`` (inter-distribution pin).
+# Matches ``"multicloud-py-<name>>=0.1.0"`` (inter-distribution pin).
 # Captures (prefix-up-to-and-including-``>=``, version, trailing-quote-and-comma-or-end).
-DEP_PIN_RE = re.compile(r'("sfdc-multicloud-[a-z-]+>=)([0-9][^"]*)(")')
+DEP_PIN_RE = re.compile(r'("multicloud-py-[a-z-]+>=)([0-9][^"]*)(")')
 
 
 def read_root_version() -> str:

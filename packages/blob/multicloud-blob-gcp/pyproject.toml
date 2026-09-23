@@ -3,7 +3,7 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sfdc-multicloud-blob-gcp"
+name = "multicloud-py-blob-gcp"
 version = "0.1.4"
 license = "Apache-2.0"
 description = "Google Cloud Storage provider for multicloud-blob."
@@ -14,8 +14,8 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "sfdc-multicloud-blob>=0.1.4",
-    "sfdc-multicloud-gcp-common>=0.1.4",
+    "multicloud-py-blob>=0.1.4",
+    "multicloud-py-gcp-common>=0.1.4",
     "google-cloud-storage>=2.14.0",
     "google-auth>=2.0.0",
 ]

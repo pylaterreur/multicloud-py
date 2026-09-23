@@ -3,7 +3,7 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sfdc-multicloud-sts-alibaba"
+name = "multicloud-py-sts-alibaba"
 version = "0.1.4"
 license = "Apache-2.0"
 description = "Alibaba Cloud RAM provider for multicloud-sts (placeholder; implementation pending)."
@@ -14,7 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "sfdc-multicloud-sts>=0.1.4",
+    "multicloud-py-sts>=0.1.4",
 ]
 
 [project.urls]
