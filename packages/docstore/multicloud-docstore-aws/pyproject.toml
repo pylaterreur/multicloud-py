@@ -1,15 +1,16 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "sfdc-multicloud-docstore-aws"
 version = "0.1.4"
+license = "Apache-2.0"
 description = "AWS DynamoDB provider for multicloud-docstore."
+readme = {text = "MultiCloud Python SDK package.", content-type = "text/markdown"}
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
 ]
 dependencies = [
@@ -18,6 +19,11 @@ dependencies = [
     "boto3>=1.18.0",
     "botocore>=1.21.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/salesforce/multicloud-py"
+Repository = "https://github.com/salesforce/multicloud-py"
+Issues = "https://github.com/salesforce/multicloud-py/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0.0", "pytest-cov>=4.0.0", "mypy>=1.0.0"]
@@ -29,6 +35,9 @@ dev = ["pytest>=7.0.0", "pytest-cov>=4.0.0", "mypy>=1.0.0"]
 # registering it.
 [project.entry-points."multicloud.docstore.providers"]
 aws = "multicloud.docstore.docstore_aws"
+
+[tool.setuptools]
+license-files = ["LICENSE.txt"]
 
 [tool.setuptools.packages.find]
 include = ["multicloud*"]

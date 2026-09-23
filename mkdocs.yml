@@ -128,6 +128,8 @@ nav:
       - multicloud.iam: api/iam.md
       - multicloud.pubsub: api/pubsub.md
       - multicloud.common: api/common.md
+  - Maintainers:
+      - Releasing: maintainers/releasing.md
 
 extra:
   generator: false
