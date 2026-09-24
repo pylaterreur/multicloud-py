@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multicloud-py-sts-alibaba"
-version = "0.1.5"
+version = "0.1.6"
 license = "Apache-2.0"
 description = "Alibaba Cloud RAM provider for multicloud-sts (placeholder; implementation pending)."
 readme = {text = "MultiCloud Python SDK package.", content-type = "text/markdown"}
@@ -14,7 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "multicloud-py-sts>=0.1.5",
+    "multicloud-py-sts>=0.1.6",
 ]
 
 [project.urls]
