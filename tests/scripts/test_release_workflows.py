@@ -32,6 +32,7 @@ def test_release_workflow_uses_release_please_and_approved_pypi_publish() -> Non
     }
     assert workflow["jobs"]["publish"]["environment"] == "pypi"
     assert workflow["jobs"]["publish"]["permissions"] == {"id-token": "write"}
+    assert "vars.PYPI_BOOTSTRAP_COMPLETE == 'true'" in workflow["jobs"]["publish"]["if"]
 
 
 def test_testpypi_rehearsal_bootstraps_three_projects_per_selected_batch() -> None:
@@ -64,6 +65,41 @@ def test_testpypi_bootstrap_batches_cover_every_distribution_once() -> None:
         for path in REPO_ROOT.glob("packages/*/*/pyproject.toml")
     }
 
+    assert len(selected_projects) == 21
+    assert len(set(selected_projects)) == 21
+    assert set(selected_projects) == package_projects
+
+
+def test_production_pypi_bootstrap_is_tagged_and_staged() -> None:
+    workflow = _load("bootstrap-pypi.yml")
+    inputs = _workflow_dispatch_inputs(workflow)
+
+    assert workflow["name"] == "Bootstrap production PyPI"
+    assert workflow["permissions"] == {}
+    assert inputs["tag"] == {
+        "description": "Release tag to publish, for example multicloud-py-v0.1.5",
+        "required": True,
+        "type": "string",
+    }
+    assert inputs["batch"]["options"] == ["1", "2", "3", "4", "5", "6", "7"]
+
+    build = workflow["jobs"]["build-and-validate"]
+    assert build["needs"] == "select-bootstrap-batch"
+    assert build["permissions"] == {"contents": "read"}
+    assert build["steps"][0]["with"]["ref"] == "${{ inputs.tag }}"
+
+    publish = workflow["jobs"]["publish"]
+    assert publish["needs"] == ["select-bootstrap-batch", "build-and-validate"]
+    assert publish["strategy"]["max-parallel"] == 3
+    assert publish["environment"] == "pypi-${{ matrix.project }}"
+    assert publish["permissions"] == {"id-token": "write"}
+
+    selector = workflow["jobs"]["select-bootstrap-batch"]["steps"][0]["run"]
+    selected_projects = re.findall(r'"project":"([^"]+)"', selector)
+    package_projects = {
+        tomllib.loads(path.read_text())["project"]["name"]
+        for path in REPO_ROOT.glob("packages/*/*/pyproject.toml")
+    }
     assert len(selected_projects) == 21
     assert len(set(selected_projects)) == 21
     assert set(selected_projects) == package_projects

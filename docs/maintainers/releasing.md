@@ -53,8 +53,10 @@ reviewed.
    job use the repository `GITHUB_TOKEN`; do not add a personal access token or
    GitHub App credential.
 2. Create the protected GitHub `pypi` environment, with the required release
-   reviewers. The TestPyPI bootstrap uses one environment per distribution:
-   `testpypi-<distribution-name>`.
+   reviewers. It is used only after the one-time production PyPI bootstrap is
+   complete. The bootstrap workflows use one environment per distribution:
+   `testpypi-<distribution-name>` for TestPyPI and
+   `pypi-<distribution-name>` for production PyPI.
 3. TestPyPI permits only three pending Trusted Publishers at a time. Register
    the three distributions in one bootstrap batch with owner `salesforce`,
    repository `multicloud-py`, workflow `test-pypi.yml`, and environment
@@ -77,7 +79,38 @@ reviewed.
    available at the expected version.
 5. Merge the PR. The tagged-release validation builds 21 wheels and 21 sdists,
    verifies their metadata/licenses, and smoke-tests isolated installed wheels.
-   Only then can the protected `pypi` deployment be approved.
+   The automatic production publish job is intentionally skipped until
+   `PYPI_BOOTSTRAP_COMPLETE` is set to `true`.
 
-PyPI and TestPyPI versions are immutable. If a partial upload occurs, fix
-forward with a new version—never retry the same version.
+## One-time production PyPI bootstrap
+
+Production PyPI treats every distribution as an independent project. A single
+pending Trusted Publisher configuration cannot create all 21 projects, so the
+first production release is intentionally staged.
+
+1. Keep the repository Actions variable `PYPI_BOOTSTRAP_COMPLETE` unset (or
+   set to anything other than `true`). This prevents `release.yml` from
+   publishing the first tag through the shared `pypi` environment.
+2. After the first release tag exists, register three **pending** publishers at
+   a time on PyPI. For each distribution, use owner `salesforce`, repository
+   `multicloud-py`, workflow `bootstrap-pypi.yml`, and environment
+   `pypi-<distribution-name>`. PyPI permits only three pending publishers at
+   once.
+3. Run **Bootstrap production PyPI** with that release tag and its batch. It
+   checks out and fully validates the tag before publishing only that batch's
+   three distributions. A successful upload turns the three pending publishers
+   into active publishers. Repeat for all seven batches.
+4. Verify the 21 released projects and install the published distributions from
+   production PyPI in a fresh environment.
+5. On each existing PyPI project, add the shared, ordinary Trusted Publisher:
+   owner `salesforce`, repository `multicloud-py`, workflow `release.yml`, and
+   environment `pypi`. This configuration can be shared because all projects
+   already exist.
+6. Set the GitHub Actions repository variable `PYPI_BOOTSTRAP_COMPLETE` to
+   `true`. Future tagged releases use the protected `pypi` environment and
+   upload the complete validated artifact set together.
+
+PyPI and TestPyPI versions are immutable. If any bootstrap upload fails after
+an artifact reaches PyPI, stop and inspect the project before continuing. Do
+not overwrite or delete artifacts; release a new version if the published set
+cannot be completed safely.

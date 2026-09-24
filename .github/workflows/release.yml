@@ -100,7 +100,10 @@ jobs:
   publish:
     name: Publish to PyPI after approval
     needs: [release-please, validate-release]
-    if: needs.release-please.outputs.release_created == 'true' && needs.validate-release.result == 'success'
+    if: >-
+      needs.release-please.outputs.release_created == 'true' &&
+      needs.validate-release.result == 'success' &&
+      vars.PYPI_BOOTSTRAP_COMPLETE == 'true'
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
