@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multicloud-py-sts"
-version = "0.1.5"
+version = "0.1.6"
 license = "Apache-2.0"
 description = "Cloud-agnostic Security Token Service client for the python-multicloud SDK. Pair with a provider package (multicloud-sts-aws / -gcp / -alibaba) for actual cloud calls."
 readme = {text = "MultiCloud Python SDK package.", content-type = "text/markdown"}
@@ -14,7 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "multicloud-py-common>=0.1.5",
+    "multicloud-py-common>=0.1.6",
 ]
 
 [project.urls]
