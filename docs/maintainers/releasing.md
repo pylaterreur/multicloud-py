@@ -18,6 +18,11 @@ selects the `simple` file-update strategy, specifies the `multicloud-py` tag
 component, and tells Release Please to update `VERSION`; it does **not**
 override the version-increment policy.
 
+The version line in `VERSION` carries Release Please's required
+`x-release-please-version` annotation. Repository scripts parse only the
+semantic version before that annotation, while Release Please uses the marker
+to update the file in every generated release PR.
+
 | Change merged since the last release | Commit convention | Result from `0.1.4` |
 | --- | --- | --- |
 | Backward-compatible bug fix | `fix: ...` | `0.1.5` |

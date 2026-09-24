@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multicloud-py-pubsub-alibaba"
-version = "0.1.4"
+version = "0.1.5"
 license = "Apache-2.0"
 description = "Alibaba Cloud MNS provider for multicloud-pubsub (placeholder; implementation pending)."
 readme = {text = "MultiCloud Python SDK package.", content-type = "text/markdown"}
@@ -14,7 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "multicloud-py-pubsub>=0.1.4",
+    "multicloud-py-pubsub>=0.1.5",
 ]
 
 [project.urls]

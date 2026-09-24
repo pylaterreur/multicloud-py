@@ -25,11 +25,13 @@ Modes
 ``--write``  Rewrite every pyproject in place so it matches VERSION.
              Run this after bumping VERSION.
 
+``--print``  Print the parsed version value for shell and CI consumers.
+
 Bumping a release
 -----------------
 ::
 
-    echo "0.2.0" > VERSION
+    printf '%s\n' '0.2.0 # x-release-please-version' > VERSION
     uv run python scripts/sync_version.py --write
     git add VERSION packages/*/*/pyproject.toml
     git commit -m "chore(release): bump to 0.2.0"
@@ -58,6 +60,9 @@ def read_root_version() -> str:
     if not VERSION_FILE.exists():
         sys.exit(f"error: {VERSION_FILE} does not exist")
     version = VERSION_FILE.read_text().strip()
+    value, separator, annotation = version.partition("#")
+    if separator and annotation.strip() == "x-release-please-version":
+        version = value.strip()
     if not version:
         sys.exit(f"error: {VERSION_FILE} is empty")
     return version
@@ -104,9 +109,19 @@ def main() -> int:
         action="store_true",
         help="Rewrite pyprojects in place so they match VERSION.",
     )
+    mode.add_argument(
+        "--print",
+        dest="print_version",
+        action="store_true",
+        help="Print the parsed root version.",
+    )
     args = parser.parse_args()
 
     target = read_root_version()
+    if args.print_version:
+        print(target)
+        return 0
+
     pyprojects = sorted(REPO_ROOT.glob(PACKAGES_GLOB))
     if not pyprojects:
         sys.exit(f"error: no pyproject.toml matched {PACKAGES_GLOB}")

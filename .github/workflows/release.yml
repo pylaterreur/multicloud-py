@@ -76,7 +76,7 @@ jobs:
       - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
         with:
           enable-cache: true
-      - run: test "${{ needs.release-please.outputs.tag_name }}" = "multicloud-py-v$(cat VERSION)"
+      - run: test "${{ needs.release-please.outputs.tag_name }}" = "multicloud-py-v$(python scripts/sync_version.py --print)"
       - run: uv lock --check
       - run: uv sync --frozen --all-groups --all-packages
       - run: uv run --frozen python -m black --check packages tests scripts
