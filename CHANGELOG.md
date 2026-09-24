@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/salesforce/multicloud-py/compare/multicloud-py-v0.1.5...multicloud-py-v0.1.6) (2026-09-24)
+
+
+### Bug Fixes
+
+* synchronize Release Please version file ([ac9bd40](https://github.com/salesforce/multicloud-py/commit/ac9bd4044032f66c088cc5507e2fd3dbfdcc471f))
+
 ## [0.1.5](https://github.com/salesforce/multicloud-py/compare/multicloud-py-v0.1.4...multicloud-py-v0.1.5) (2026-09-24)
 
 
