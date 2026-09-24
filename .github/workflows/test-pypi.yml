@@ -2,10 +2,57 @@ name: TestPyPI Rehearsal
 
 on:
   workflow_dispatch:
+    inputs:
+      batch:
+        description: Bootstrap batch to publish (three packages per run)
+        required: true
+        default: "1"
+        type: choice
+        options: ["1", "2", "3", "4", "5", "6", "7"]
 
 permissions: {}
 
 jobs:
+  select-bootstrap-batch:
+    name: Select TestPyPI bootstrap batch
+    runs-on: ubuntu-latest
+    permissions: {}
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+    steps:
+      - id: select
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "${{ inputs.batch }}" in
+            1)
+              matrix='{"include":[{"project":"multicloud-py-common"},{"project":"multicloud-py-aws-common"},{"project":"multicloud-py-gcp-common"}]}'
+              ;;
+            2)
+              matrix='{"include":[{"project":"multicloud-py-blob"},{"project":"multicloud-py-blob-aws"},{"project":"multicloud-py-blob-gcp"}]}'
+              ;;
+            3)
+              matrix='{"include":[{"project":"multicloud-py-blob-alibaba"},{"project":"multicloud-py-docstore"},{"project":"multicloud-py-docstore-aws"}]}'
+              ;;
+            4)
+              matrix='{"include":[{"project":"multicloud-py-docstore-gcp-firestore"},{"project":"multicloud-py-iam"},{"project":"multicloud-py-iam-aws"}]}'
+              ;;
+            5)
+              matrix='{"include":[{"project":"multicloud-py-iam-gcp"},{"project":"multicloud-py-pubsub"},{"project":"multicloud-py-pubsub-aws"}]}'
+              ;;
+            6)
+              matrix='{"include":[{"project":"multicloud-py-pubsub-gcp"},{"project":"multicloud-py-pubsub-alibaba"},{"project":"multicloud-py-sts"}]}'
+              ;;
+            7)
+              matrix='{"include":[{"project":"multicloud-py-sts-aws"},{"project":"multicloud-py-sts-gcp"},{"project":"multicloud-py-sts-alibaba"}]}'
+              ;;
+            *)
+              echo "Unsupported bootstrap batch: ${{ inputs.batch }}" >&2
+              exit 1
+              ;;
+          esac
+          echo "matrix=${matrix}" >> "$GITHUB_OUTPUT"
+
   build-and-validate:
     runs-on: ubuntu-latest
     permissions:
@@ -36,9 +83,13 @@ jobs:
           retention-days: 14
 
   publish-testpypi:
-    needs: build-and-validate
+    needs: [select-bootstrap-batch, build-and-validate]
     runs-on: ubuntu-latest
-    environment: testpypi
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix: ${{ fromJSON(needs.select-bootstrap-batch.outputs.matrix) }}
+    environment: testpypi-${{ matrix.project }}
     permissions:
       id-token: write
     steps:
@@ -46,8 +97,18 @@ jobs:
         with:
           name: testpypi-rehearsal-${{ github.sha }}
           path: dist
+      - name: Select this project's distributions
+        shell: bash
+        env:
+          PROJECT: ${{ matrix.project }}
+        run: |
+          set -euo pipefail
+          normalized_project="${PROJECT//-/_}"
+          mkdir package-dist
+          find dist -maxdepth 1 -type f -name "${normalized_project}-*" -exec cp {} package-dist/ \;
+          test "$(find package-dist -maxdepth 1 -type f | wc -l | tr -d ' ')" = 2
       - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
         with:
-          packages-dir: dist/
+          packages-dir: package-dist/
           repository-url: https://test.pypi.org/legacy/
           verbose: true

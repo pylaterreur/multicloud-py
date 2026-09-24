@@ -20,7 +20,7 @@ override the version-increment policy.
 
 | Change merged since the last release | Commit convention | Result from `0.1.4` |
 | --- | --- | --- |
-| Backward-compatible bug fix or other non-feature change | `fix: ...` | `0.1.5` |
+| Backward-compatible bug fix | `fix: ...` | `0.1.5` |
 | Backward-compatible capability | `feat: ...` | `0.2.0` |
 | Breaking public API change | `feat!: ...` or a `BREAKING CHANGE:` footer | `1.0.0` |
 
@@ -52,12 +52,16 @@ reviewed.
    grant read/write workflow permissions. Release Please and the synchronization
    job use the repository `GITHUB_TOKEN`; do not add a personal access token or
    GitHub App credential.
-2. Create protected GitHub environments named `pypi` and `testpypi`, with the
-   required release reviewers.
-3. In both PyPI and TestPyPI, create a pending Trusted Publisher for every
-   `multicloud-py-*` distribution. Use owner `salesforce`, repository
-   `multicloud-py`, and environments `pypi`/`testpypi`; use `release.yml` for
-   PyPI and `test-pypi.yml` for TestPyPI.
+2. Create the protected GitHub `pypi` environment, with the required release
+   reviewers. The TestPyPI bootstrap uses one environment per distribution:
+   `testpypi-<distribution-name>`.
+3. TestPyPI permits only three pending Trusted Publishers at a time. Register
+   the three distributions in one bootstrap batch with owner `salesforce`,
+   repository `multicloud-py`, workflow `test-pypi.yml`, and environment
+   `testpypi-<distribution-name>`. Run **TestPyPI Rehearsal** for that batch;
+   successful publication converts those three entries to active publishers and
+   frees three pending slots. Repeat for all seven batches before the complete
+   TestPyPI installation rehearsal.
 4. Require the normal pull-request CI workflow on `main`.
 
 ## First release
@@ -69,8 +73,8 @@ reviewed.
    maintainer must approve or rerun normal PR CI on the latest synchronized
    commit.
 4. Before merging the first release PR, run **TestPyPI Rehearsal** against the
-   release branch, approve the `testpypi` environment, and confirm all 21
-   distributions are available at the expected version.
+   release branch for each required batch and confirm all 21 distributions are
+   available at the expected version.
 5. Merge the PR. The tagged-release validation builds 21 wheels and 21 sdists,
    verifies their metadata/licenses, and smoke-tests isolated installed wheels.
    Only then can the protected `pypi` deployment be approved.
