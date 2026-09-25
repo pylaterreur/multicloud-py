@@ -32,7 +32,7 @@ jobs:
               matrix='{"include":[{"project":"multicloud-py-blob"},{"project":"multicloud-py-blob-aws"},{"project":"multicloud-py-blob-gcp"}]}'
               ;;
             3)
-              matrix='{"include":[{"project":"multicloud-py-blob-alibaba"},{"project":"multicloud-py-docstore"},{"project":"multicloud-py-docstore-aws"}]}'
+              matrix='{"include":[{"project":"multicloud-py-blob-ali"},{"project":"multicloud-py-docstore"},{"project":"multicloud-py-docstore-aws"}]}'
               ;;
             4)
               matrix='{"include":[{"project":"multicloud-py-docstore-gcp-firestore"},{"project":"multicloud-py-iam"},{"project":"multicloud-py-iam-aws"}]}'
@@ -41,10 +41,10 @@ jobs:
               matrix='{"include":[{"project":"multicloud-py-iam-gcp"},{"project":"multicloud-py-pubsub"},{"project":"multicloud-py-pubsub-aws"}]}'
               ;;
             6)
-              matrix='{"include":[{"project":"multicloud-py-pubsub-gcp"},{"project":"multicloud-py-pubsub-alibaba"},{"project":"multicloud-py-sts"}]}'
+              matrix='{"include":[{"project":"multicloud-py-pubsub-gcp"},{"project":"multicloud-py-pubsub-ali"},{"project":"multicloud-py-sts"}]}'
               ;;
             7)
-              matrix='{"include":[{"project":"multicloud-py-sts-aws"},{"project":"multicloud-py-sts-gcp"},{"project":"multicloud-py-sts-alibaba"}]}'
+              matrix='{"include":[{"project":"multicloud-py-sts-aws"},{"project":"multicloud-py-sts-gcp"},{"project":"multicloud-py-sts-ali"}]}'
               ;;
             *)
               echo "Unsupported bootstrap batch: ${{ inputs.batch }}" >&2
@@ -111,4 +111,5 @@ jobs:
         with:
           packages-dir: package-dist/
           repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
           verbose: true

@@ -115,7 +115,7 @@ jobs:
           - multicloud-py-blob
           - multicloud-py-blob-aws
           - multicloud-py-blob-gcp
-          - multicloud-py-blob-alibaba
+          - multicloud-py-blob-ali
           - multicloud-py-docstore
           - multicloud-py-docstore-aws
           - multicloud-py-docstore-gcp-firestore
@@ -125,11 +125,11 @@ jobs:
           - multicloud-py-pubsub
           - multicloud-py-pubsub-aws
           - multicloud-py-pubsub-gcp
-          - multicloud-py-pubsub-alibaba
+          - multicloud-py-pubsub-ali
           - multicloud-py-sts
           - multicloud-py-sts-aws
           - multicloud-py-sts-gcp
-          - multicloud-py-sts-alibaba
+          - multicloud-py-sts-ali
     environment: pypi-${{ matrix.project }}
     permissions:
       id-token: write

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "multicloud-py-blob"
 version = "0.1.8"
 license = "Apache-2.0"
-description = "Cloud-agnostic blob storage client for the python-multicloud SDK. Pair with a provider package (multicloud-blob-aws / -gcp / -alibaba) for actual cloud calls."
+description = "Cloud-agnostic blob storage client for the python-multicloud SDK. Pair with a provider package (multicloud-blob-aws / -gcp / -ali) for actual cloud calls."
 readme = {text = "MultiCloud Python SDK package.", content-type = "text/markdown"}
 requires-python = ">=3.10"
 classifiers = [
@@ -33,6 +33,6 @@ include = ["multicloud*"]
 
 # multicloud/ and multicloud/blob/ are PEP 420 implicit namespace packages
 # (no __init__.py at multicloud/ or multicloud/blob/) so the provider
-# distributions (multicloud-blob-aws / -gcp / -alibaba) can drop their
+# distributions (multicloud-blob-aws / -gcp / -ali) can drop their
 # subpackages alongside blob_client/ at install time. Only blob_client/
 # itself is a concrete leaf owned by THIS distribution.

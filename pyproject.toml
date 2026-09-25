@@ -7,12 +7,12 @@
 #   multicloud-py-common, multicloud-py-aws-common,
 #   multicloud-py-gcp-common, multicloud-py-blob,
 #   multicloud-py-blob-aws, multicloud-py-blob-gcp,
-#   multicloud-py-blob-alibaba, multicloud-py-sts,
+#   multicloud-py-blob-ali, multicloud-py-sts,
 #   multicloud-py-sts-aws, multicloud-py-sts-gcp,
-#   multicloud-py-sts-alibaba, multicloud-py-iam,
+#   multicloud-py-sts-ali, multicloud-py-iam,
 #   multicloud-py-iam-aws, multicloud-py-iam-gcp,
 #   multicloud-py-pubsub, multicloud-py-pubsub-aws,
-#   multicloud-py-pubsub-gcp, multicloud-py-pubsub-alibaba,
+#   multicloud-py-pubsub-gcp, multicloud-py-pubsub-ali,
 #   multicloud-py-docstore, multicloud-py-docstore-aws,
 #   multicloud-py-docstore-gcp-firestore
 #
@@ -53,18 +53,18 @@ multicloud-py-gcp-common     = { workspace = true }
 multicloud-py-blob           = { workspace = true }
 multicloud-py-blob-aws       = { workspace = true }
 multicloud-py-blob-gcp       = { workspace = true }
-multicloud-py-blob-alibaba   = { workspace = true }
+multicloud-py-blob-ali   = { workspace = true }
 multicloud-py-sts            = { workspace = true }
 multicloud-py-sts-aws        = { workspace = true }
 multicloud-py-sts-gcp        = { workspace = true }
-multicloud-py-sts-alibaba    = { workspace = true }
+multicloud-py-sts-ali    = { workspace = true }
 multicloud-py-iam            = { workspace = true }
 multicloud-py-iam-aws        = { workspace = true }
 multicloud-py-iam-gcp        = { workspace = true }
 multicloud-py-pubsub         = { workspace = true }
 multicloud-py-pubsub-aws     = { workspace = true }
 multicloud-py-pubsub-gcp     = { workspace = true }
-multicloud-py-pubsub-alibaba = { workspace = true }
+multicloud-py-pubsub-ali = { workspace = true }
 multicloud-py-docstore       = { workspace = true }
 multicloud-py-docstore-aws   = { workspace = true }
 

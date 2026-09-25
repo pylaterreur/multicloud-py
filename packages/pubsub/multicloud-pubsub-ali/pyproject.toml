@@ -3,10 +3,10 @@ requires = ["setuptools==84.0.0", "wheel==0.48.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "multicloud-py-pubsub-alibaba"
+name = "multicloud-py-pubsub-ali"
 version = "0.1.8"
 license = "Apache-2.0"
-description = "Alibaba Cloud MNS provider for multicloud-pubsub (placeholder; implementation pending)."
+description = "Ali MNS provider for multicloud-pubsub (placeholder; implementation pending)."
 readme = {text = "MultiCloud Python SDK package.", content-type = "text/markdown"}
 requires-python = ">=3.10"
 classifiers = [
@@ -26,10 +26,10 @@ Issues = "https://github.com/salesforce/multicloud-py/issues"
 dev = ["pytest>=7.0.0", "pytest-cov>=4.0.0", "mypy>=1.0.0"]
 
 [project.entry-points."multicloud.pubsub.topic.providers"]
-alibaba = "multicloud.pubsub.pubsub_ali"
+ali = "multicloud.pubsub.pubsub_ali"
 
 [project.entry-points."multicloud.pubsub.subscription.providers"]
-alibaba = "multicloud.pubsub.pubsub_ali"
+ali = "multicloud.pubsub.pubsub_ali"
 
 [tool.setuptools]
 license-files = ["LICENSE.txt"]

@@ -1,6 +1,6 @@
 # Python Multi-Cloud SDK
 
-A cloud-agnostic Python library providing unified interfaces for cloud services across AWS, GCP, and Alibaba Cloud. Write code once, run it on any supported cloud — only the `provider` keyword argument changes.
+A cloud-agnostic Python library providing unified interfaces for cloud services across AWS, GCP, and Ali. Write code once, run it on any supported cloud — only the `provider` keyword argument changes.
 
 ## Overview
 
@@ -8,7 +8,7 @@ The Python Multi-Cloud SDK follows a **three-layer architecture** (Client → Dr
 
 ### Design Principles
 
-- **Consistent API**: Single interface across AWS, GCP, and Alibaba Cloud
+- **Consistent API**: Single interface across AWS, GCP, and Ali
 - **Direct SDK Usage**: Uses official provider SDKs (boto3, google-cloud-storage, etc.) — no custom HTTP calls
 - **Provider Registry**: Decorator-based registration with lazy import and helpful error messages
 - **Unified Error Hierarchy**: Provider-specific exceptions translated to a common `SubstrateSdkException` tree
@@ -40,12 +40,12 @@ packages/                                  # uv workspace — one directory per 
 │   ├── multicloud-blob/                   #   Cloud-agnostic API (BucketClient + BaseBlobStore, sync + async)
 │   ├── multicloud-blob-aws/               #   AWS S3 implementation
 │   ├── multicloud-blob-gcp/               #   GCP Cloud Storage implementation
-│   └── multicloud-blob-alibaba/           #   Alibaba OSS implementation (placeholder)
+│   └── multicloud-blob-ali/           #   Ali OSS implementation (placeholder)
 ├── sts/                                   # Security Token Service
 │   ├── multicloud-sts/                    #   Cloud-agnostic API (StsClient + BaseSts)
 │   ├── multicloud-sts-aws/                #   AWS STS implementation
 │   ├── multicloud-sts-gcp/                #   GCP implementation
-│   └── multicloud-sts-alibaba/            #   Alibaba STS implementation (placeholder)
+│   └── multicloud-sts-ali/            #   Ali STS implementation (placeholder)
 ├── iam/                                   # Identity and Access Management
 │   ├── multicloud-iam/                    #   Cloud-agnostic API (IamClient + BaseIam)
 │   ├── multicloud-iam-aws/                #   AWS IAM implementation
@@ -58,7 +58,7 @@ packages/                                  # uv workspace — one directory per 
     ├── multicloud-pubsub/                 #   Cloud-agnostic API
     ├── multicloud-pubsub-aws/             #   AWS SNS/SQS implementation
     ├── multicloud-pubsub-gcp/             #   GCP Pub/Sub implementation
-    └── multicloud-pubsub-alibaba/         #   Alibaba MNS implementation (placeholder)
+    └── multicloud-pubsub-ali/         #   Ali MNS implementation (placeholder)
 
 # Each distribution directory holds a PEP 420 namespace tree, e.g.
 #   packages/blob/multicloud-blob-aws/multicloud/blob/blob_aws/aws_blob_store.py
@@ -89,7 +89,7 @@ examples/
 
 ## Services
 
-| Service | AWS | GCP | Alibaba Cloud |
+| Service | AWS | GCP | Ali |
 |---------|-----|-----|---------------|
 | Blob Storage | ✓ S3 | ✓ Cloud Storage | ⌛ OSS |
 | Security Token Service | ✓ STS | ✓ IAM | ⌛ STS |
@@ -132,8 +132,8 @@ Available distributions:
 | `multicloud-py-docstore-aws` / `-docstore-gcp-firestore` | Document store backed by DynamoDB / Firestore |
 | `multicloud-py-pubsub-aws` / `-pubsub-gcp` | Publish/subscribe backed by SNS-SQS / Pub-Sub |
 
-The Alibaba Cloud distributions — `multicloud-py-blob-alibaba`,
-`multicloud-py-sts-alibaba`, and `multicloud-py-pubsub-alibaba` — are
+The Ali distributions — `multicloud-py-blob-ali`,
+`multicloud-py-sts-ali`, and `multicloud-py-pubsub-ali` — are
 **placeholder packages** (distribution name reserved, implementation pending).
 Installing one registers no provider yet, so the client raises
 `No provider registered`. See the Services table above (`⌛` = Planned) for
@@ -142,7 +142,7 @@ per-provider status.
 The shared `multicloud-py-aws-common` / `-gcp-common` packages are pulled in
 transitively by the provider distributions; you don't install them directly.
 
-A blob-only AWS deployment lands `boto3` only — no GCP or Alibaba SDKs on
+A blob-only AWS deployment lands `boto3` only — no GCP or Ali SDKs on
 disk. Strict isolation, no opt-in flags.
 
 ### For Local Development
@@ -235,7 +235,7 @@ with BucketClient(provider="aws", bucket="my-bucket", region="us-west-2") as cli
     try:
         client.download(key="nonexistent.txt")
     except ResourceNotFoundException:
-        print("Object not found — works the same on AWS, GCP, or Alibaba")
+        print("Object not found — works the same on AWS, GCP, or Ali")
     except UnAuthorizedException:
         print("Credentials missing or expired")
     except SubstrateSdkException as e:

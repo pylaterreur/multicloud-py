@@ -10,6 +10,11 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 WORKFLOWS = REPO_ROOT / ".github" / "workflows"
+ALI_PROJECTS = {
+    "multicloud-py-blob-ali",
+    "multicloud-py-pubsub-ali",
+    "multicloud-py-sts-ali",
+}
 
 
 def _load(name: str) -> dict:
@@ -71,6 +76,7 @@ def test_release_publish_matrix_covers_every_distribution_once() -> None:
     assert len(selected_projects) == 21
     assert len(set(selected_projects)) == 21
     assert set(selected_projects) == package_projects
+    assert ALI_PROJECTS <= set(selected_projects)
 
 
 def test_testpypi_rehearsal_bootstraps_three_projects_per_selected_batch() -> None:
@@ -92,6 +98,8 @@ def test_testpypi_rehearsal_bootstraps_three_projects_per_selected_batch() -> No
     assert publish["strategy"]["max-parallel"] == 3
     assert publish["environment"] == "testpypi-${{ matrix.project }}"
     assert publish["permissions"] == {"id-token": "write"}
+    upload = publish["steps"][-1]
+    assert upload["with"]["skip-existing"] is True
 
 
 def test_testpypi_bootstrap_batches_cover_every_distribution_once() -> None:
@@ -106,6 +114,7 @@ def test_testpypi_bootstrap_batches_cover_every_distribution_once() -> None:
     assert len(selected_projects) == 21
     assert len(set(selected_projects)) == 21
     assert set(selected_projects) == package_projects
+    assert ALI_PROJECTS <= set(selected_projects)
 
 
 def test_distribution_build_backends_are_exactly_pinned() -> None:

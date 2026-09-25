@@ -3,10 +3,10 @@ requires = ["setuptools==84.0.0", "wheel==0.48.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "multicloud-py-blob-alibaba"
+name = "multicloud-py-sts-ali"
 version = "0.1.8"
 license = "Apache-2.0"
-description = "Alibaba Cloud OSS provider for multicloud-blob (placeholder; implementation pending)."
+description = "Ali RAM provider for multicloud-sts (placeholder; implementation pending)."
 readme = {text = "MultiCloud Python SDK package.", content-type = "text/markdown"}
 requires-python = ">=3.10"
 classifiers = [
@@ -14,7 +14,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "multicloud-py-blob>=0.1.8",
+    "multicloud-py-sts>=0.1.8",
 ]
 
 [project.urls]
@@ -25,8 +25,8 @@ Issues = "https://github.com/salesforce/multicloud-py/issues"
 [project.optional-dependencies]
 dev = ["pytest>=7.0.0", "pytest-cov>=4.0.0", "mypy>=1.0.0"]
 
-[project.entry-points."multicloud.blob.providers"]
-alibaba = "multicloud.blob.blob_ali"
+[project.entry-points."multicloud.sts.providers"]
+ali = "multicloud.sts.sts_ali"
 
 [tool.setuptools]
 license-files = ["LICENSE.txt"]

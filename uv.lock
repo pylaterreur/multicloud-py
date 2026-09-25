@@ -13,7 +13,7 @@ resolution-markers = [
 members = [
     "multicloud-py-aws-common",
     "multicloud-py-blob",
-    "multicloud-py-blob-alibaba",
+    "multicloud-py-blob-ali",
     "multicloud-py-blob-aws",
     "multicloud-py-blob-gcp",
     "multicloud-py-common",
@@ -25,11 +25,11 @@ members = [
     "multicloud-py-iam-aws",
     "multicloud-py-iam-gcp",
     "multicloud-py-pubsub",
-    "multicloud-py-pubsub-alibaba",
+    "multicloud-py-pubsub-ali",
     "multicloud-py-pubsub-aws",
     "multicloud-py-pubsub-gcp",
     "multicloud-py-sts",
-    "multicloud-py-sts-alibaba",
+    "multicloud-py-sts-ali",
     "multicloud-py-sts-aws",
     "multicloud-py-sts-gcp",
 ]
@@ -1903,9 +1903,9 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
-name = "multicloud-py-blob-alibaba"
+name = "multicloud-py-blob-ali"
 version = "0.1.8"
-source = { editable = "packages/blob/multicloud-blob-alibaba" }
+source = { editable = "packages/blob/multicloud-blob-ali" }
 dependencies = [
     { name = "multicloud-py-blob" },
 ]
@@ -2237,9 +2237,9 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
-name = "multicloud-py-pubsub-alibaba"
+name = "multicloud-py-pubsub-ali"
 version = "0.1.8"
-source = { editable = "packages/pubsub/multicloud-pubsub-alibaba" }
+source = { editable = "packages/pubsub/multicloud-pubsub-ali" }
 dependencies = [
     { name = "multicloud-py-pubsub" },
 ]
@@ -2345,9 +2345,9 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
-name = "multicloud-py-sts-alibaba"
+name = "multicloud-py-sts-ali"
 version = "0.1.8"
-source = { editable = "packages/sts/multicloud-sts-alibaba" }
+source = { editable = "packages/sts/multicloud-sts-ali" }
 dependencies = [
     { name = "multicloud-py-sts" },
 ]
