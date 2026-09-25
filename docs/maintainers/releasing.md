@@ -91,20 +91,21 @@ reviewed.
 
 Production PyPI treats every distribution as an independent project. A single
 pending Trusted Publisher configuration cannot create all 21 projects, so the
-first production release is intentionally staged.
+initial production publication is intentionally staged.
 
 1. Keep the repository Actions variable `PYPI_BOOTSTRAP_COMPLETE` unset (or
    set to anything other than `true`). This prevents `release.yml` from
    publishing the first tag through the shared `pypi` environment.
-2. After the first release tag exists, register three **pending** publishers at
-   a time on PyPI. For each distribution, use owner `salesforce`, repository
-   `multicloud-py`, workflow `bootstrap-pypi.yml`, and environment
-   `pypi-<distribution-name>`. PyPI permits only three pending publishers at
-   once.
-3. Run **Bootstrap production PyPI** with that release tag and its batch. It
-   checks out and fully validates the tag before publishing only that batch's
-   three distributions. A successful upload turns the three pending publishers
-   into active publishers. Repeat for all seven batches.
+2. From a reviewed `main` commit with synchronized package versions, register
+   three **pending** publishers at a time on PyPI. For each distribution, use
+   owner `salesforce`, repository `multicloud-py`, workflow
+   `bootstrap-pypi.yml`, and environment `pypi-<distribution-name>`. PyPI
+   permits only three pending publishers at once.
+3. Run **Bootstrap production PyPI** on `main` with that batch, just like the
+   TestPyPI bootstrap. It fully validates the selected commit before publishing
+   only that batch's three distributions. A successful upload turns the three
+   pending publishers into active publishers. Repeat for all seven batches; no
+   new GitHub release or tag is required between batches.
 4. Verify the 21 released projects and install the published distributions from
    production PyPI in a fresh environment.
 5. On each existing PyPI project, add the shared, ordinary Trusted Publisher:

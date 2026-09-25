@@ -70,23 +70,22 @@ def test_testpypi_bootstrap_batches_cover_every_distribution_once() -> None:
     assert set(selected_projects) == package_projects
 
 
-def test_production_pypi_bootstrap_is_tagged_and_staged() -> None:
+def test_production_pypi_bootstrap_uses_selected_branch_and_staged_batches() -> None:
     workflow = _load("bootstrap-pypi.yml")
     inputs = _workflow_dispatch_inputs(workflow)
 
     assert workflow["name"] == "Bootstrap production PyPI"
     assert workflow["permissions"] == {}
-    assert inputs["tag"] == {
-        "description": "Release tag to publish, for example multicloud-py-v0.1.5",
-        "required": True,
-        "type": "string",
-    }
+    assert set(inputs) == {"batch"}
     assert inputs["batch"]["options"] == ["1", "2", "3", "4", "5", "6", "7"]
+    assert workflow["concurrency"]["group"] == (
+        "pypi-bootstrap-${{ github.sha }}-${{ inputs.batch }}"
+    )
 
     build = workflow["jobs"]["build-and-validate"]
     assert build["needs"] == "select-bootstrap-batch"
     assert build["permissions"] == {"contents": "read"}
-    assert build["steps"][0]["with"]["ref"] == "${{ inputs.tag }}"
+    assert "ref" not in build["steps"][0].get("with", {})
 
     publish = workflow["jobs"]["publish"]
     assert publish["needs"] == ["select-bootstrap-batch", "build-and-validate"]
