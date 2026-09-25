@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/salesforce/multicloud-py/compare/multicloud-py-v0.1.7...multicloud-py-v0.1.8) (2026-09-25)
+
+
+### Bug Fixes
+
+* **ci:** target repository in release dispatch ([2b93ca2](https://github.com/salesforce/multicloud-py/commit/2b93ca25c9aeb73da7ae6126b9ace09148b85126))
+
 ## [0.1.7](https://github.com/salesforce/multicloud-py/compare/multicloud-py-v0.1.6...multicloud-py-v0.1.7) (2026-09-25)
 
 
