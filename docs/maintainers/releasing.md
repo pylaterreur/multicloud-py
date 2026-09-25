@@ -97,9 +97,9 @@ delete or overwrite published artifacts.
 
 ## Migrating the production Trusted Publishers to `release.yml`
 
-The production projects were initially created with `bootstrap-pypi.yml`.
-Before merging the next release PR, update every one of the 21 existing PyPI
-projects under **Manage → Publishing**:
+The retained production projects were initially created with
+`bootstrap-pypi.yml`. Before merging the next release PR, update each of the 18
+retained PyPI projects under **Manage → Publishing**:
 
 - Owner: `salesforce`
 - Repository: `multicloud-py`
@@ -107,6 +107,17 @@ projects under **Manage → Publishing**:
 - Environment: `pypi-<distribution-name>`
 
 Add the `release.yml` publisher first, then remove the old
-`bootstrap-pypi.yml` publisher. Do not merge a release PR until all 21 projects
-show the new publisher. TestPyPI publishers continue using `test-pypi.yml` and
-do not need migration.
+`bootstrap-pypi.yml` publisher.
+
+The three new Ali distributions require these exact registrations:
+
+| Distribution | Production workflow | Production environment | Test workflow | Test environment |
+| --- | --- | --- | --- | --- |
+| `multicloud-py-blob-ali` | `release.yml` | `pypi-multicloud-py-blob-ali` | `test-pypi.yml` | `testpypi-multicloud-py-blob-ali` |
+| `multicloud-py-pubsub-ali` | `release.yml` | `pypi-multicloud-py-pubsub-ali` | `test-pypi.yml` | `testpypi-multicloud-py-pubsub-ali` |
+| `multicloud-py-sts-ali` | `release.yml` | `pypi-multicloud-py-sts-ali` | `test-pypi.yml` | `testpypi-multicloud-py-sts-ali` |
+
+Keep release PR #10 unmerged until these three new production publishers and
+all 18 retained production publishers trust `release.yml`. Existing TestPyPI
+publishers continue using `test-pypi.yml`; only the three new Ali projects need
+new TestPyPI registrations.

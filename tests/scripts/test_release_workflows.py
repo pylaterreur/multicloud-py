@@ -127,3 +127,14 @@ def test_distribution_build_backends_are_exactly_pinned() -> None:
         ]
         assert build_requirements
         assert all("==" in requirement for requirement in build_requirements), manifest
+
+
+def test_release_guide_lists_ali_trusted_publishers() -> None:
+    guide = (REPO_ROOT / "docs" / "maintainers" / "releasing.md").read_text()
+
+    for project in ALI_PROJECTS:
+        expected_row = (
+            f"| `{project}` | `release.yml` | `pypi-{project}` | "
+            f"`test-pypi.yml` | `testpypi-{project}` |"
+        )
+        assert expected_row in guide
