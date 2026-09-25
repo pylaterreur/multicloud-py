@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/salesforce/multicloud-py/compare/multicloud-py-v0.1.6...multicloud-py-v0.1.7) (2026-09-25)
+
+
+### Bug Fixes
+
+* **packaging:** repair and automate PyPI releases ([e1c6ef8](https://github.com/salesforce/multicloud-py/commit/e1c6ef82e48994854f4691638faf77b962c9092b))
+
 ## [0.1.6](https://github.com/salesforce/multicloud-py/compare/multicloud-py-v0.1.5...multicloud-py-v0.1.6) (2026-09-24)
 
 
