@@ -41,9 +41,11 @@ def test_release_workflow_dispatches_registered_pypi_publisher_after_validation(
     step = dispatch["steps"][0]
     assert step["env"] == {
         "GH_TOKEN": "${{ github.token }}",
+        "REPOSITORY": "${{ github.repository }}",
         "TAG_NAME": "${{ needs.release-please.outputs.tag_name }}",
     }
     assert "gh workflow run bootstrap-pypi.yml" in step["run"]
+    assert '--repo "${REPOSITORY}"' in step["run"]
     assert '--ref "${TAG_NAME}"' in step["run"]
     assert "-f batch=all" in step["run"]
 
