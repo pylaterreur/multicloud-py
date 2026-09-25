@@ -97,24 +97,59 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-  dispatch-production-publish:
-    name: Dispatch trusted production publisher
+  publish:
+    name: Publish to PyPI
     needs: [release-please, validate-release]
     if: >-
       needs.release-please.outputs.release_created == 'true' &&
       needs.validate-release.result == 'success'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        project:
+          - multicloud-py-common
+          - multicloud-py-aws-common
+          - multicloud-py-gcp-common
+          - multicloud-py-blob
+          - multicloud-py-blob-aws
+          - multicloud-py-blob-gcp
+          - multicloud-py-blob-alibaba
+          - multicloud-py-docstore
+          - multicloud-py-docstore-aws
+          - multicloud-py-docstore-gcp-firestore
+          - multicloud-py-iam
+          - multicloud-py-iam-aws
+          - multicloud-py-iam-gcp
+          - multicloud-py-pubsub
+          - multicloud-py-pubsub-aws
+          - multicloud-py-pubsub-gcp
+          - multicloud-py-pubsub-alibaba
+          - multicloud-py-sts
+          - multicloud-py-sts-aws
+          - multicloud-py-sts-gcp
+          - multicloud-py-sts-alibaba
+    environment: pypi-${{ matrix.project }}
     permissions:
-      actions: write
-      contents: read
+      id-token: write
     steps:
-      - name: Publish the validated tag through the registered PyPI workflow
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pypi-release-${{ needs.release-please.outputs.tag_name }}
+          path: dist
+      - name: Select this project's distributions
+        shell: bash
         env:
-          GH_TOKEN: ${{ github.token }}
-          REPOSITORY: ${{ github.repository }}
-          TAG_NAME: ${{ needs.release-please.outputs.tag_name }}
-        run: >-
-          gh workflow run bootstrap-pypi.yml
-          --repo "${REPOSITORY}"
-          --ref "${TAG_NAME}"
-          -f batch=all
+          PROJECT: ${{ matrix.project }}
+        run: |
+          set -euo pipefail
+          normalized_project="${PROJECT//-/_}"
+          mkdir package-dist
+          find dist -maxdepth 1 -type f -name "${normalized_project}-*" -exec cp {} package-dist/ \;
+          test "$(find package-dist -maxdepth 1 -type f | wc -l | tr -d ' ')" = 2
+      - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
+        with:
+          packages-dir: package-dist/
+          skip-existing: true
+          verbose: true

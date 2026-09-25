@@ -21,9 +21,7 @@ def _workflow_dispatch_inputs(workflow: dict) -> dict:
     return workflow.get("on", workflow.get(True))["workflow_dispatch"]["inputs"]
 
 
-def test_release_workflow_dispatches_registered_pypi_publisher_after_validation() -> (
-    None
-):
+def test_release_workflow_publishes_validated_artifacts_directly() -> None:
     workflow = _load("release.yml")
 
     assert workflow["name"] == "Release"
@@ -32,22 +30,47 @@ def test_release_workflow_dispatches_registered_pypi_publisher_after_validation(
         "contents": "write",
         "pull-requests": "write",
     }
-    assert "publish" not in workflow["jobs"]
-    dispatch = workflow["jobs"]["dispatch-production-publish"]
-    assert dispatch["needs"] == ["release-please", "validate-release"]
-    assert dispatch["permissions"] == {"actions": "write", "contents": "read"}
-    assert "needs.release-please.outputs.release_created == 'true'" in dispatch["if"]
-    assert "needs.validate-release.result == 'success'" in dispatch["if"]
-    step = dispatch["steps"][0]
-    assert step["env"] == {
-        "GH_TOKEN": "${{ github.token }}",
-        "REPOSITORY": "${{ github.repository }}",
-        "TAG_NAME": "${{ needs.release-please.outputs.tag_name }}",
+    assert workflow["concurrency"] == {
+        "group": "release-main",
+        "cancel-in-progress": False,
     }
-    assert "gh workflow run bootstrap-pypi.yml" in step["run"]
-    assert '--repo "${REPOSITORY}"' in step["run"]
-    assert '--ref "${TAG_NAME}"' in step["run"]
-    assert "-f batch=all" in step["run"]
+
+    validate = workflow["jobs"]["validate-release"]
+    artifact_name = validate["steps"][-1]["with"]["name"]
+    assert artifact_name == (
+        "pypi-release-${{ needs.release-please.outputs.tag_name }}"
+    )
+
+    publish = workflow["jobs"]["publish"]
+    assert publish["needs"] == ["release-please", "validate-release"]
+    assert "needs.release-please.outputs.release_created == 'true'" in publish["if"]
+    assert "needs.validate-release.result == 'success'" in publish["if"]
+    assert publish["strategy"]["fail-fast"] is False
+    assert publish["strategy"]["max-parallel"] == 3
+    assert publish["environment"] == "pypi-${{ matrix.project }}"
+    assert publish["permissions"] == {"id-token": "write"}
+
+    download = publish["steps"][0]
+    assert download["with"]["name"] == artifact_name
+    assert download["with"]["path"] == "dist"
+    assert all("uv build" not in step.get("run", "") for step in publish["steps"])
+
+    upload = publish["steps"][-1]
+    assert upload["with"]["packages-dir"] == "package-dist/"
+    assert upload["with"]["skip-existing"] is True
+
+
+def test_release_publish_matrix_covers_every_distribution_once() -> None:
+    workflow = _load("release.yml")
+    selected_projects = workflow["jobs"]["publish"]["strategy"]["matrix"]["project"]
+    package_projects = {
+        tomllib.loads(path.read_text())["project"]["name"]
+        for path in REPO_ROOT.glob("packages/*/*/pyproject.toml")
+    }
+
+    assert len(selected_projects) == 21
+    assert len(set(selected_projects)) == 21
+    assert set(selected_projects) == package_projects
 
 
 def test_testpypi_rehearsal_bootstraps_three_projects_per_selected_batch() -> None:
@@ -85,44 +108,13 @@ def test_testpypi_bootstrap_batches_cover_every_distribution_once() -> None:
     assert set(selected_projects) == package_projects
 
 
-def test_production_pypi_bootstrap_uses_selected_branch_and_staged_batches() -> None:
-    workflow = _load("bootstrap-pypi.yml")
-    inputs = _workflow_dispatch_inputs(workflow)
+def test_distribution_build_backends_are_exactly_pinned() -> None:
+    manifests = sorted(REPO_ROOT.glob("packages/*/*/pyproject.toml"))
 
-    assert workflow["name"] == "Bootstrap production PyPI"
-    assert workflow["permissions"] == {}
-    assert set(inputs) == {"batch"}
-    assert inputs["batch"]["options"] == [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "all",
-    ]
-    assert workflow["concurrency"]["group"] == (
-        "pypi-bootstrap-${{ github.sha }}-${{ inputs.batch }}"
-    )
-
-    build = workflow["jobs"]["build-and-validate"]
-    assert build["needs"] == "select-bootstrap-batch"
-    assert build["permissions"] == {"contents": "read"}
-    assert "ref" not in build["steps"][0].get("with", {})
-
-    publish = workflow["jobs"]["publish"]
-    assert publish["needs"] == ["select-bootstrap-batch", "build-and-validate"]
-    assert publish["strategy"]["max-parallel"] == 3
-    assert publish["environment"] == "pypi-${{ matrix.project }}"
-    assert publish["permissions"] == {"id-token": "write"}
-
-    selector = workflow["jobs"]["select-bootstrap-batch"]["steps"][0]["run"]
-    selected_projects = re.findall(r'"project":"([^"]+)"', selector)
-    package_projects = {
-        tomllib.loads(path.read_text())["project"]["name"]
-        for path in REPO_ROOT.glob("packages/*/*/pyproject.toml")
-    }
-    assert len(selected_projects) == 21
-    assert len(set(selected_projects)) == 21
-    assert set(selected_projects) == package_projects
+    assert len(manifests) == 21
+    for manifest in manifests:
+        build_requirements = tomllib.loads(manifest.read_text())["build-system"][
+            "requires"
+        ]
+        assert build_requirements
+        assert all("==" in requirement for requirement in build_requirements), manifest

@@ -61,6 +61,8 @@ reviewed.
    release reviewers. The publishing workflows use
    `testpypi-<distribution-name>` for TestPyPI and
    `pypi-<distribution-name>` for production PyPI.
+   Each production PyPI project must trust workflow `release.yml` with its
+   matching `pypi-<distribution-name>` environment.
 3. TestPyPI permits only three pending Trusted Publishers at a time. Register
    the three distributions in one bootstrap batch with owner `salesforce`,
    repository `multicloud-py`, workflow `test-pypi.yml`, and environment
@@ -70,50 +72,41 @@ reviewed.
    TestPyPI installation rehearsal.
 4. Require the normal pull-request CI workflow on `main`.
 
-## First release
+## Normal release process
 
-1. Push this bootstrap commit, which carries `Release-As: 0.1.4`.
-2. Release Please opens one release PR and the synchronization job updates all
-   package versions and `uv.lock` on that branch.
-3. Because `GITHUB_TOKEN` updates do not automatically start PR workflows, a
-   maintainer must approve or rerun normal PR CI on the latest synchronized
-   commit.
-4. Before merging the first release PR, run **TestPyPI Rehearsal** against the
-   release branch for each required batch and confirm all 21 distributions are
-   available at the expected version.
-5. Merge the PR. The tagged-release validation builds 21 wheels and 21 sdists,
-   verifies their metadata/licenses, and installs and imports each wheel in a
-   separate environment. After validation succeeds, `release.yml` dispatches
-   `bootstrap-pypi.yml` at the immutable release tag with `batch=all`.
+The maintainer-facing process intentionally matches MultiCloudJ:
 
-## One-time production PyPI bootstrap
+1. Merge conventional commits to `main`.
+2. Release Please opens or updates one release PR. The synchronization job
+   updates all 21 package manifests and `uv.lock` on that branch.
+3. Review the release PR and ensure its normal CI checks pass.
+4. Merge the release PR. No separate publishing workflow needs to be started.
+5. The same `release.yml` run creates the Git tag and GitHub release, builds 21
+   wheels and 21 sdists, runs the unit and replay-mode conformance suites,
+   validates metadata and licenses, and installs each wheel independently.
+6. Only after validation succeeds, the workflow publishes the exact validated
+   artifacts through the 21 `pypi-<distribution-name>` environments. The
+   release run remains in progress until every PyPI project finishes, and it
+   fails if any publication fails.
 
-Production PyPI treats every distribution as an independent project. A single
-pending Trusted Publisher configuration cannot create all 21 projects, so the
-initial production publication is intentionally staged.
+The `release-main` concurrency group serializes the complete process, including
+publication. PyPI and TestPyPI versions are immutable. The publisher uses
+PyPI's duplicate-skipping support so a failed matrix job can be rerun without
+re-uploading an artifact that already succeeded. Rerun only failed jobs; never
+delete or overwrite published artifacts.
 
-1. From a reviewed `main` commit with synchronized package versions, register
-   three **pending** publishers at a time on PyPI. For each distribution, use
-   owner `salesforce`, repository `multicloud-py`, workflow
-   `bootstrap-pypi.yml`, and environment `pypi-<distribution-name>`. PyPI
-   permits only three pending publishers at once.
-2. Run **Bootstrap production PyPI** on `main` with that batch, just like the
-   TestPyPI bootstrap. It fully validates the selected commit before publishing
-   only that batch's three distributions. A successful upload turns the three
-   pending publishers into active publishers. Repeat for all seven batches; no
-   new GitHub release or tag is required between batches.
-3. Verify the 21 released projects and install the published distributions from
-   production PyPI in a fresh environment.
+## Migrating the production Trusted Publishers to `release.yml`
 
-The pending publishers become ordinary publishers after first use and require
-no replacement. Future releases continue using `bootstrap-pypi.yml`, because
-PyPI binds trusted publishing to the exact workflow filename and environment.
-Once Release Please creates a tag and the tagged artifacts pass validation,
-`release.yml` dispatches that registered workflow with `batch=all`. The
-publisher then uploads all 21 distributions through their individual
-`pypi-<distribution-name>` environments.
+The production projects were initially created with `bootstrap-pypi.yml`.
+Before merging the next release PR, update every one of the 21 existing PyPI
+projects under **Manage → Publishing**:
 
-PyPI and TestPyPI versions are immutable. If any bootstrap upload fails after
-an artifact reaches PyPI, stop and inspect the project before continuing. Do
-not overwrite or delete artifacts; release a new version if the published set
-cannot be completed safely.
+- Owner: `salesforce`
+- Repository: `multicloud-py`
+- Workflow: `release.yml`
+- Environment: `pypi-<distribution-name>`
+
+Add the `release.yml` publisher first, then remove the old
+`bootstrap-pypi.yml` publisher. Do not merge a release PR until all 21 projects
+show the new publisher. TestPyPI publishers continue using `test-pypi.yml` and
+do not need migration.

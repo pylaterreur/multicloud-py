@@ -1,6 +1,6 @@
 # Root workspace for the python-multicloud SDK.
 #
-# This file is NOT itself a distribution. The SDK ships as 18 separate
+# This file is NOT itself a distribution. The SDK ships as 21 separate
 # distributions (all prefixed with ``multicloud-py-`` for public PyPI release),
 # one per directory under ``packages/``:
 #
@@ -12,7 +12,9 @@
 #   multicloud-py-sts-alibaba, multicloud-py-iam,
 #   multicloud-py-iam-aws, multicloud-py-iam-gcp,
 #   multicloud-py-pubsub, multicloud-py-pubsub-aws,
-#   multicloud-py-pubsub-gcp, multicloud-py-pubsub-alibaba
+#   multicloud-py-pubsub-gcp, multicloud-py-pubsub-alibaba,
+#   multicloud-py-docstore, multicloud-py-docstore-aws,
+#   multicloud-py-docstore-gcp-firestore
 #
 # Note: distribution names carry the ``multicloud-py-`` prefix, but the Python
 # import namespace remains ``multicloud.*`` (unchanged). End users
