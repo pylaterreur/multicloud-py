@@ -15,6 +15,7 @@ classifiers = [
 ]
 dependencies = [
     "multicloud-py-pubsub>=0.1.6",
+    "multicloud-py-gcp-common>=0.1.6",
     "google-cloud-pubsub>=2.0.0",
     "google-auth>=2.0.0",
 ]

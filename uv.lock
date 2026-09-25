@@ -2297,6 +2297,7 @@ source = { editable = "packages/pubsub/multicloud-pubsub-gcp" }
 dependencies = [
     { name = "google-auth" },
     { name = "google-cloud-pubsub" },
+    { name = "multicloud-py-gcp-common" },
     { name = "multicloud-py-pubsub" },
 ]
 
@@ -2311,6 +2312,7 @@ dev = [
 requires-dist = [
     { name = "google-auth", specifier = ">=2.0.0" },
     { name = "google-cloud-pubsub", specifier = ">=2.0.0" },
+    { name = "multicloud-py-gcp-common", editable = "packages/common/multicloud-gcp-common" },
     { name = "multicloud-py-pubsub", editable = "packages/pubsub/multicloud-pubsub" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },

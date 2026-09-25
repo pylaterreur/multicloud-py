@@ -57,9 +57,8 @@ reviewed.
    grant read/write workflow permissions. Release Please and the synchronization
    job use the repository `GITHUB_TOKEN`; do not add a personal access token or
    GitHub App credential.
-2. Create the protected GitHub `pypi` environment, with the required release
-   reviewers. It is used only after the one-time production PyPI bootstrap is
-   complete. The bootstrap workflows use one environment per distribution:
+2. Create one protected GitHub environment per distribution, with the required
+   release reviewers. The publishing workflows use
    `testpypi-<distribution-name>` for TestPyPI and
    `pypi-<distribution-name>` for production PyPI.
 3. TestPyPI permits only three pending Trusted Publishers at a time. Register
@@ -83,9 +82,9 @@ reviewed.
    release branch for each required batch and confirm all 21 distributions are
    available at the expected version.
 5. Merge the PR. The tagged-release validation builds 21 wheels and 21 sdists,
-   verifies their metadata/licenses, and smoke-tests isolated installed wheels.
-   The automatic production publish job is intentionally skipped until
-   `PYPI_BOOTSTRAP_COMPLETE` is set to `true`.
+   verifies their metadata/licenses, and installs and imports each wheel in a
+   separate environment. After validation succeeds, `release.yml` dispatches
+   `bootstrap-pypi.yml` at the immutable release tag with `batch=all`.
 
 ## One-time production PyPI bootstrap
 
@@ -93,28 +92,26 @@ Production PyPI treats every distribution as an independent project. A single
 pending Trusted Publisher configuration cannot create all 21 projects, so the
 initial production publication is intentionally staged.
 
-1. Keep the repository Actions variable `PYPI_BOOTSTRAP_COMPLETE` unset (or
-   set to anything other than `true`). This prevents `release.yml` from
-   publishing the first tag through the shared `pypi` environment.
-2. From a reviewed `main` commit with synchronized package versions, register
+1. From a reviewed `main` commit with synchronized package versions, register
    three **pending** publishers at a time on PyPI. For each distribution, use
    owner `salesforce`, repository `multicloud-py`, workflow
    `bootstrap-pypi.yml`, and environment `pypi-<distribution-name>`. PyPI
    permits only three pending publishers at once.
-3. Run **Bootstrap production PyPI** on `main` with that batch, just like the
+2. Run **Bootstrap production PyPI** on `main` with that batch, just like the
    TestPyPI bootstrap. It fully validates the selected commit before publishing
    only that batch's three distributions. A successful upload turns the three
    pending publishers into active publishers. Repeat for all seven batches; no
    new GitHub release or tag is required between batches.
-4. Verify the 21 released projects and install the published distributions from
+3. Verify the 21 released projects and install the published distributions from
    production PyPI in a fresh environment.
-5. On each existing PyPI project, add the shared, ordinary Trusted Publisher:
-   owner `salesforce`, repository `multicloud-py`, workflow `release.yml`, and
-   environment `pypi`. This configuration can be shared because all projects
-   already exist.
-6. Set the GitHub Actions repository variable `PYPI_BOOTSTRAP_COMPLETE` to
-   `true`. Future tagged releases use the protected `pypi` environment and
-   upload the complete validated artifact set together.
+
+The pending publishers become ordinary publishers after first use and require
+no replacement. Future releases continue using `bootstrap-pypi.yml`, because
+PyPI binds trusted publishing to the exact workflow filename and environment.
+Once Release Please creates a tag and the tagged artifacts pass validation,
+`release.yml` dispatches that registered workflow with `batch=all`. The
+publisher then uploads all 21 distributions through their individual
+`pypi-<distribution-name>` environments.
 
 PyPI and TestPyPI versions are immutable. If any bootstrap upload fails after
 an artifact reaches PyPI, stop and inspect the project before continuing. Do

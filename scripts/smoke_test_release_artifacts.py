@@ -31,29 +31,31 @@ def main() -> int:
     wheels = sorted(args.artifact_directory.glob("*.whl"))
     if len(wheels) != 21:
         raise SystemExit(f"expected 21 wheels, found {len(wheels)}")
-    modules = sorted({module for wheel in wheels for module in _modules(wheel)})
-    names = sorted(str(parse_wheel_filename(wheel.name)[0]) for wheel in wheels)
-
     with tempfile.TemporaryDirectory(prefix="multicloud-py-release-") as directory:
-        venv = Path(directory) / "venv"
-        subprocess.run([sys.executable, "-m", "venv", venv], check=True)
-        python = venv / "bin" / "python"
-        subprocess.run(
-            [
-                python,
-                "-m",
-                "pip",
-                "install",
-                "--find-links",
-                args.artifact_directory,
-                *names,
-            ],
-            check=True,
-        )
-        script = "import importlib; " + "; ".join(
-            f"importlib.import_module({module!r})" for module in modules
-        )
-        subprocess.run([python, "-I", "-c", script], check=True)
+        for wheel in wheels:
+            name = str(parse_wheel_filename(wheel.name)[0])
+            venv = Path(directory) / name
+            subprocess.run([sys.executable, "-m", "venv", venv], check=True)
+            python = venv / "bin" / "python"
+            subprocess.run(
+                [
+                    python,
+                    "-m",
+                    "pip",
+                    "install",
+                    "--disable-pip-version-check",
+                    "--quiet",
+                    "--find-links",
+                    args.artifact_directory,
+                    wheel,
+                ],
+                check=True,
+            )
+            script = "import importlib; " + "; ".join(
+                f"importlib.import_module({module!r})"
+                for module in sorted(_modules(wheel))
+            )
+            subprocess.run([python, "-I", "-c", script], check=True)
     return 0
 
 

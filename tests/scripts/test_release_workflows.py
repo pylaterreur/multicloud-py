@@ -21,7 +21,9 @@ def _workflow_dispatch_inputs(workflow: dict) -> dict:
     return workflow.get("on", workflow.get(True))["workflow_dispatch"]["inputs"]
 
 
-def test_release_workflow_uses_release_please_and_approved_pypi_publish() -> None:
+def test_release_workflow_dispatches_registered_pypi_publisher_after_validation() -> (
+    None
+):
     workflow = _load("release.yml")
 
     assert workflow["name"] == "Release"
@@ -30,9 +32,20 @@ def test_release_workflow_uses_release_please_and_approved_pypi_publish() -> Non
         "contents": "write",
         "pull-requests": "write",
     }
-    assert workflow["jobs"]["publish"]["environment"] == "pypi"
-    assert workflow["jobs"]["publish"]["permissions"] == {"id-token": "write"}
-    assert "vars.PYPI_BOOTSTRAP_COMPLETE == 'true'" in workflow["jobs"]["publish"]["if"]
+    assert "publish" not in workflow["jobs"]
+    dispatch = workflow["jobs"]["dispatch-production-publish"]
+    assert dispatch["needs"] == ["release-please", "validate-release"]
+    assert dispatch["permissions"] == {"actions": "write", "contents": "read"}
+    assert "needs.release-please.outputs.release_created == 'true'" in dispatch["if"]
+    assert "needs.validate-release.result == 'success'" in dispatch["if"]
+    step = dispatch["steps"][0]
+    assert step["env"] == {
+        "GH_TOKEN": "${{ github.token }}",
+        "TAG_NAME": "${{ needs.release-please.outputs.tag_name }}",
+    }
+    assert "gh workflow run bootstrap-pypi.yml" in step["run"]
+    assert '--ref "${TAG_NAME}"' in step["run"]
+    assert "-f batch=all" in step["run"]
 
 
 def test_testpypi_rehearsal_bootstraps_three_projects_per_selected_batch() -> None:
@@ -77,7 +90,16 @@ def test_production_pypi_bootstrap_uses_selected_branch_and_staged_batches() -> 
     assert workflow["name"] == "Bootstrap production PyPI"
     assert workflow["permissions"] == {}
     assert set(inputs) == {"batch"}
-    assert inputs["batch"]["options"] == ["1", "2", "3", "4", "5", "6", "7"]
+    assert inputs["batch"]["options"] == [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "all",
+    ]
     assert workflow["concurrency"]["group"] == (
         "pypi-bootstrap-${{ github.sha }}-${{ inputs.batch }}"
     )
