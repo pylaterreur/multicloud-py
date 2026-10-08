@@ -99,6 +99,33 @@ examples/
 
 ✓ = Implemented, ⌛ = Planned
 
+### Customer onboarding example scope
+
+The reference onboarding workflows cover **AWS and GCP** synchronous Blob
+upload/download/delete, STS credential validation, Docstore put/get/delete,
+and Pub/Sub publish/receive/acknowledge. This is a selected onboarding scope,
+not a claim that every SDK operation is exercised by the example.
+
+- IAM remains implemented in the SDK, but is outside the reference onboarding
+  service's validated scope. Async APIs likewise require separate validation.
+- Ali Blob, STS and Pub/Sub distributions are placeholders; a package name or
+  successful installation does not mean its provider is usable. Ali Docstore
+  and IAM are planned, not supported by this onboarding reference.
+- STS examples use AWS caller identity and GCP OAuth credential refresh. GCP
+  ID-token identity has different credential prerequisites; never expose tokens
+  or use unverified JWT claims as authenticated identity.
+- Pub/Sub validation needs a dedicated subscription, a unique message body,
+  and verification **before** acknowledgement. No SDK correlation-ID feature
+  is required; arbitrary message metadata is not a delivery-matching guarantee.
+- Install only the required provider distributions. An AWS+GCP commercial
+  artifact must exclude Ali implementations and native Ali SDK dependencies.
+  Do not mix legacy and public distributions sharing `multicloud.*` imports.
+
+An installed package, offline unit test, or replayed conformance test is not
+proof of a successful live cloud call. Validate the consuming application
+against dedicated resources on each target provider before onboarding users.
+
+
 ## Installation
 
 The SDK ships as multiple distributions sharing the `multicloud.*` namespace,
@@ -109,7 +136,7 @@ provider you need; transitive dependencies (the cloud-agnostic client +
 `multicloud-py-common`, plus any shared provider-common package) are pulled
 in automatically.
 
-### From PyPI (Not Available Yet)
+### From PyPI
 
 ```bash
 # Blob storage on AWS — installs multicloud-py-blob-aws + multicloud-py-blob + multicloud-py-common + boto3
