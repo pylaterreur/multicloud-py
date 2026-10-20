@@ -27,7 +27,7 @@ provider when you create a client.
 | IAM | IAM | IAM | [API reference](api/iam.md) |
 | Document Store | DynamoDB | Firestore | [Examples](https://github.com/salesforce/multicloud-py/tree/main/examples) |
 
-Alibaba Cloud distributions currently reserve package names; their provider
+Ali Cloud distributions currently reserve package names; their provider
 implementations are planned. See the [roadmap](roadmap.md) for development plans.
 
 ## One API across clouds
