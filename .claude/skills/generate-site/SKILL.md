@@ -1,18 +1,18 @@
 ---
 name: generate-site
-description: Use when previewing, validating, publishing, or diagnosing the MultiCloud-Py documentation website and its GitHub Pages deployment.
+description: Use when previewing, validating, publishing, or diagnosing the MultiCloud-Py documentation website and its branch-based GitHub Pages deployment.
 ---
 
 # Build and publish the documentation website
 
 Read `AGENTS.md`, `mkdocs.yml`, `.github/workflows/docs.yml`, and
 `docs/maintainers/website.md`. Sources live on `main` in `docs/`. API pages
-are rendered from source docstrings by mkdocstrings. This public repository
-deploys an Actions artifact, rather than committing generated HTML to a branch.
+are rendered from source docstrings by mkdocstrings. GitHub Pages serves
+static output committed to the `site` branch's `/docs` folder.
 
 ## Preview and validate
 
-Use a clean, current checkout or an isolated worktree; preserve existing work.
+Use a current, clean checkout or isolated worktree; preserve existing work.
 From the repository root:
 
 ```bash
@@ -20,46 +20,62 @@ uv run --frozen --group docs mkdocs build --strict
 uv run --frozen --group docs mkdocs serve
 ```
 
-Use the local URL printed by MkDocs. Fix build errors in source; do not
-suppress strict warnings. Inspect rendered pages and check the links and
-Python imports changed by the task. Do not commit the ignored `site/` output.
-For content changes, use `multi-cloudpy-docs-guides` and open a PR to `main`.
+Use the local URL printed by MkDocs. Fix errors in source rather than
+suppressing strict warnings. Inspect rendered pages, changed links, and
+Python imports. Do not commit generated output to `main`: its `docs/` tree
+contains Markdown sources, and `site/` is ignored. Content changes use
+`multi-cloudpy-docs-guides` and a source PR against `main` first.
 
-## Publish
+## Prepare a publishing PR
 
-Merging a source PR into `main` triggers the Documentation workflow. Pull
-requests build without deploying. For an authorized republish of current
-`main`, inspect the existing run first and then use:
+The Documentation Actions workflow validates source builds but does not
+publish. Merging a source PR into `main` alone does not update the website.
+
+Follow the publishing commands in `docs/maintainers/website.md`:
+
+1. Fetch the public repository's `main` and `site` branches. Resolve the
+   exact merged source SHA and build it in an isolated source worktree.
+2. Build with `--strict --site-dir` into a fresh temporary directory.
+3. Create a unique publishing branch and worktree from the existing `site`
+   branch. Replace only that isolated worktree's generated `/docs` tree
+   with the fresh output, including `docs/.nojekyll`.
+4. Review added, changed, and removed pages and check local links. Preserve
+   files outside the generated tree. If the diff is empty, stop.
+5. Commit with the source SHA, push the publishing branch to an authorized
+   remote, and open a PR against `salesforce/multicloud-py:site`. Use a fork
+   if upstream branch creation is unavailable; use `OWNER:BRANCH` as the PR
+   head in that case.
+
+Do not use `mkdocs gh-deploy`, orphan or force-replace an existing publishing
+branch, reset someone's checkout, or overwrite `main/docs` with HTML.
+Bootstrap a missing `site` branch only as an explicitly authorized initial
+setup; do not silently change the destination to `gh-pages` or `main`.
+
+## Verify publication
+
+After the publishing PR merges, Pages builds `site:/docs`. Confirm with:
 
 ```bash
-gh workflow run docs.yml --repo salesforce/multicloud-py --ref main
-gh run list --repo salesforce/multicloud-py --workflow docs.yml --limit 5
-```
-
-Resolve the matching run ID from its branch and commit before watching it:
-
-```bash
-gh run watch RUN_ID --repo salesforce/multicloud-py --exit-status
 gh api repos/salesforce/multicloud-py/pages
+gh api repos/salesforce/multicloud-py/pages/builds/latest
 ```
 
-Publication needs repository Settings → Pages → Source set to **GitHub
-Actions**. A Pages API 404 or `Configure Pages` failure can mean missing
-setup or insufficient access; confirm repository permissions before diagnosing
-it. Report a missing setup step rather than claiming publication succeeded.
-Do not change Pages settings, merge PRs, or dispatch deployments without
-authorization for the corresponding action.
+The configuration should have `build_type: legacy`, source branch `site`,
+and path `/docs`. A GitHub-provided Pages build can appear in Actions even
+though the publication source is a branch. Rerunning the Documentation
+workflow only validates source; it does not publish the site.
 
-The deployment job needs `pages: write`, `id-token: write`, a successful build,
-and the `github-pages` environment. Confirm the returned Pages URL and check
-the public homepage and a guide after deployment. If a run fails, inspect
-`gh run view RUN_ID --repo salesforce/multicloud-py --log-failed` and fix the
-identified problem before retrying.
+For initial migration, first merge the change that removes Actions artifact
+deployment and let older deployments finish. Once a validated `site:/docs`
+snapshot exists, an authorized administrator selects Settings → Pages →
+**Deploy from a branch**, **site**, **/docs**. Do not change repository settings
+or merge PRs without authorization for those actions.
 
-The canonical URL is `https://opensource.salesforce.com/multicloud-py/`.
-The shared organization domain is inherited; do not add a repository `CNAME`
-for it. Do not use `mkdocs gh-deploy`, force-push a publishing branch, or
-reset the working tree as part of this workflow.
+A Pages API 404 may indicate missing setup or insufficient access. Confirm
+permissions and report the exact blocker rather than claiming deployment.
+The canonical URL is `https://opensource.salesforce.com/multicloud-py/`;
+leave its inherited organization domain alone and do not add a repository
+`CNAME`. Verify the homepage and at least one guide after a successful build.
 
-Report the source PR or commit, strict-build result, deployment status, and
-verified URL. Distinguish a local preview from a published site.
+Report the source SHA, publishing PR, strict-build result, Pages build status,
+and verified URL. Distinguish a local preview from a published website.

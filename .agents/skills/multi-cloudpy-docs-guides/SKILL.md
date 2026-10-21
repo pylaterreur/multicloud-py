@@ -62,5 +62,6 @@ Preview changed pages with `uv run --frozen --group docs mkdocs serve`.
 Open a PR against `salesforce/multicloud-py:main`, using a conventional
 `docs:` title and describing what is documented and how it was validated.
 Do not require internal work items. Generated `site/` stays out of Git;
-publication after merge is handled by the Documentation workflow. Use
-`generate-site` for deployment diagnosis or an authorized republish.
+the Documentation workflow validates source but does not publish. After the
+source PR merges into `main`, use `generate-site` to prepare a separate
+publishing PR against `site`, placing generated HTML in that branch's `/docs`.

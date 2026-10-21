@@ -70,7 +70,7 @@ Keep the matching `SKILL.md` files identical when changing a shared workflow.
 | --- | --- |
 | `multicloudpy-feature-dev` | Cross-provider operations, API extensions, and conformance tests |
 | `multi-cloudpy-docs-guides` | Usage guides and API-reference source updates |
-| `generate-site` | Preview, validate, and publish through the Documentation workflow |
+| `generate-site` | Preview, validate, and prepare a publishing PR to the `site` branch |
 | `onboard-e2e-example` | Add a service lifecycle to the live E2E harness |
 
 Use the feature-development skill before implementing a new SDK operation.
@@ -79,9 +79,10 @@ Read only skills relevant to the task. Codex explicit invocation uses
 
 ## Website
 
-Markdown sources live in `docs/`, configured by `mkdocs.yml`. The Documentation
-workflow builds pull requests and publishes successful `main` builds through
-GitHub Actions Pages deployment. Generated `site/` is ignored; do not commit
-it or create a manual publishing branch. The canonical URL is
+Markdown sources live on `main` in `docs/`, configured by `mkdocs.yml`. The
+Documentation workflow validates source builds. Pages serves generated HTML
+from the `site` branch's `/docs` folder; publish through a separate PR against
+`site` after source changes merge. Generated output must not replace Markdown
+on `main`. The local `site/` build directory stays ignored. The canonical URL is
 `https://opensource.salesforce.com/multicloud-py/`. See
 `docs/maintainers/website.md` for setup and maintenance.
