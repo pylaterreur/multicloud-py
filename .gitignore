@@ -166,7 +166,7 @@ cython_debug/
 
 # Share repository skills; keep other agent settings local.
 .claude/*
-!.claude/skills/
+!.claude/skills
 .agents/*
 !.agents/skills/
 
