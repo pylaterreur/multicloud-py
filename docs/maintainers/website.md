@@ -52,7 +52,7 @@ mkdir -p "$PUBLISH_DIR/docs"
 cp -R "$BUILD_DIR/." "$PUBLISH_DIR/docs/"
 touch "$PUBLISH_DIR/docs/.nojekyll"
 git -C "$PUBLISH_DIR" add docs
-git -C "$PUBLISH_DIR" diff --cached --check
+git -C "$PUBLISH_DIR" diff --cached --stat
 ```
 
 Review the complete generated change, verify the homepage and at least one
