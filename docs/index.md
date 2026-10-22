@@ -53,6 +53,14 @@ before running the example.
 - [API reference](api/index.md): signatures, types, and source docstrings.
 - [Examples](https://github.com/salesforce/multicloud-py/tree/main/examples): working SDK examples.
 
+### Salesforce-internal onboarding
+
+Salesforce employees can also use the
+[internal Substrate SDK documentation](https://docs.internal.salesforce.com/falcon/substrate-sdk/)
+for service-onboarding guidance. This site requires Salesforce access and is
+not a prerequisite for using the open-source SDK. Public users can follow
+[Getting started](getting-started.md) and the [usage guides](guides/index.md).
+
 ## Community
 
 - [GitHub repository](https://github.com/salesforce/multicloud-py)
