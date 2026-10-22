@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://opensource.salesforce.com/multicloud-py/guides/pubsub-guide/">
       
       
-        <link rel="prev" href="../sts-guide/">
+        <link rel="prev" href="../iam-guide/">
       
       
         <link rel="next" href="../../design/">
@@ -54,6 +54,8 @@
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/site.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -351,6 +353,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="../../team/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Team
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -515,6 +536,8 @@
       
         
       
+        
+      
     
     
     
@@ -632,6 +655,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../iam-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IAM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -695,138 +746,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#creating-clients" class="md-nav__link">
+  <a href="#install-and-configure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creating Clients
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Creating Clients">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#topic-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Topic Client
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscription-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Subscription Client
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#constructor-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constructor Parameters
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#publishing-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Publishing Messages
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Publishing Messages">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#building-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Building Messages
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#receiving-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Receiving Messages
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Receiving Messages">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#batch-acknowledgments" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Batch Acknowledgments
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#negative-acknowledgment-with-visibility-timeout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Negative Acknowledgment with Visibility Timeout
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscription-attributes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Subscription Attributes
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-handling" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error Handling
+        Install and configure
       
     </span>
   </a>
@@ -834,10 +757,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#switching-providers" class="md-nav__link">
+  <a href="#publish-a-message" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Switching Providers
+        Publish a message
       
     </span>
   </a>
@@ -845,10 +768,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
+  <a href="#receive-and-acknowledge" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Complete Example
+        Receive and acknowledge
       
     </span>
   </a>
@@ -856,10 +779,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#client-lifecycle" class="md-nav__link">
+  <a href="#batch-acknowledgments-and-negative-acknowledgments" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Client Lifecycle
+        Batch acknowledgments and negative acknowledgments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attributes-and-retry-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attributes and retry classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors-and-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errors and cleanup
       
     </span>
   </a>
@@ -1039,6 +984,8 @@
       
         
       
+        
+      
     
     
     
@@ -1184,6 +1131,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/docstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    multicloud.docstore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/pubsub/" class="md-nav__link">
         
   
@@ -1246,6 +1221,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Team
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
@@ -1266,10 +1268,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -1287,8 +1289,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1388,138 +1390,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#creating-clients" class="md-nav__link">
+  <a href="#install-and-configure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creating Clients
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Creating Clients">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#topic-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Topic Client
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscription-client" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Subscription Client
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#constructor-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constructor Parameters
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#publishing-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Publishing Messages
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Publishing Messages">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#building-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Building Messages
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#receiving-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Receiving Messages
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Receiving Messages">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#batch-acknowledgments" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Batch Acknowledgments
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#negative-acknowledgment-with-visibility-timeout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Negative Acknowledgment with Visibility Timeout
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscription-attributes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Subscription Attributes
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-handling" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error Handling
+        Install and configure
       
     </span>
   </a>
@@ -1527,10 +1401,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#switching-providers" class="md-nav__link">
+  <a href="#publish-a-message" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Switching Providers
+        Publish a message
       
     </span>
   </a>
@@ -1538,10 +1412,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
+  <a href="#receive-and-acknowledge" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Complete Example
+        Receive and acknowledge
       
     </span>
   </a>
@@ -1549,10 +1423,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#client-lifecycle" class="md-nav__link">
+  <a href="#batch-acknowledgments-and-negative-acknowledgments" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Client Lifecycle
+        Batch acknowledgments and negative acknowledgments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attributes-and-retry-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attributes and retry classification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors-and-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errors and cleanup
       
     </span>
   </a>
@@ -1584,318 +1480,118 @@
   
 
 
-<h1 id="pubsub-guide">Pub/Sub Guide<a class="headerlink" href="#pubsub-guide" title="Permanent link">&para;</a></h1>
-<p>The Pub/Sub service provides cloud-agnostic publish-subscribe messaging — send messages to topics and receive them from subscriptions across AWS SNS/SQS, Google Cloud Pub/Sub, and Ali MNS.</p>
-<h2 id="creating-clients">Creating Clients<a class="headerlink" href="#creating-clients" title="Permanent link">&para;</a></h2>
-<h3 id="topic-client">Topic Client<a class="headerlink" href="#topic-client" title="Permanent link">&para;</a></h3>
-<p><code>TopicClient</code> is scoped to a single topic. All operations target that topic.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">TopicClient</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># AWS SNS</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">...</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Google Cloud Pub/Sub</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;gcp&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-central1&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="o">...</span>
+<h1 id="pubsub-guide">Pub/Sub guide<a class="headerlink" href="#pubsub-guide" title="Permanent link">&para;</a></h1>
+<p><code>TopicClient</code> publishes messages; <code>SubscriptionClient</code> receives and acknowledges
+them. AWS SNS/SQS and GCP Pub/Sub implementations are present. Ali is a
+placeholder package and cannot yet provide these operations.</p>
+<h2 id="install-and-configure">Install and configure<a class="headerlink" href="#install-and-configure" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>multicloud-py-pubsub-aws
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># Or:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip<span class="w"> </span>install<span class="w"> </span>multicloud-py-pubsub-gcp
 </span></code></pre></div>
-<h3 id="subscription-client">Subscription Client<a class="headerlink" href="#subscription-client" title="Permanent link">&para;</a></h3>
-<p><code>SubscriptionClient</code> is scoped to a single subscription. All operations target that subscription.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">SubscriptionClient</span>
+<p>Create the topic, queue/subscription, and any routing between them before using
+the SDK. Configure the provider's standard credentials and permissions.
+The clients operate on existing resources; they do not provision them.</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Provider ID</th>
+<th>Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TopicClient</code> for SNS</td>
+<td><code>awssns</code></td>
+<td>Topic ARN</td>
+</tr>
+<tr>
+<td><code>TopicClient</code> for SQS</td>
+<td><code>awssqs</code></td>
+<td>Queue URL or name</td>
+</tr>
+<tr>
+<td><code>SubscriptionClient</code> for SQS</td>
+<td><code>aws</code></td>
+<td>Queue URL or name</td>
+</tr>
+<tr>
+<td>GCP clients</td>
+<td><code>gcp</code></td>
+<td>Fully qualified topic or subscription name</td>
+</tr>
+</tbody>
+</table>
+<p>AWS topic IDs distinguish the two publishing backends. A bare <code>aws</code> selects
+neither topic implementation. GCP names take the form
+<code>projects/PROJECT/topics/TOPIC</code> or <code>projects/PROJECT/subscriptions/SUBSCRIPTION</code>.</p>
+<h2 id="publish-a-message">Publish a message<a class="headerlink" href="#publish-a-message" title="Permanent link">&para;</a></h2>
+<p>Replace <code>YOUR_TOPIC_ARN</code> with an existing SNS topic ARN. Use <code>awssqs</code> with
+an existing queue to publish directly to SQS, or <code>gcp</code> with a full topic name.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub.pubsub_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">TopicClient</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># AWS SQS</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;orders-processor&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="o">...</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Google Cloud Pub/Sub</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;gcp&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;orders-processor&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-central1&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="o">...</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;awssns&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;YOUR_TOPIC_ARN&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span> <span class="k">as</span> <span class="n">publisher</span><span class="p">:</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">Message</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="o">.</span><span class="n">with_body</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;{&quot;order_id&quot;: &quot;example&quot;}&#39;</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="o">.</span><span class="n">with_metadata</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">publisher</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </span></code></pre></div>
-<h3 id="constructor-parameters">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permanent link">&para;</a></h3>
-<p><strong>TopicClient:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th style="text-align: center;">Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>provider</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;">✅</td>
-<td>Provider id: <code>"aws"</code>, <code>"gcp"</code>, or <code>"ali"</code></td>
-</tr>
-<tr>
-<td><code>topic_name</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;">✅</td>
-<td>Topic name</td>
-</tr>
-<tr>
-<td><code>region</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;"></td>
-<td>Region/location</td>
-</tr>
-<tr>
-<td><code>endpoint</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;"></td>
-<td>Endpoint URL override</td>
-</tr>
-</tbody>
-</table>
-<p><strong>SubscriptionClient:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th style="text-align: center;">Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>provider</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;">✅</td>
-<td>Provider id: <code>"aws"</code>, <code>"gcp"</code>, or <code>"ali"</code></td>
-</tr>
-<tr>
-<td><code>subscription_name</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;">✅</td>
-<td>Subscription name</td>
-</tr>
-<tr>
-<td><code>region</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;"></td>
-<td>Region/location</td>
-</tr>
-<tr>
-<td><code>endpoint</code></td>
-<td><code>str</code></td>
-<td style="text-align: center;"></td>
-<td>Endpoint URL override</td>
-</tr>
-<tr>
-<td><code>nack_visibility_timeout</code></td>
-<td><code>timedelta</code></td>
-<td style="text-align: center;"></td>
-<td>Default visibility timeout for nacks</td>
-</tr>
-</tbody>
-</table>
-<p>All parameters are <strong>keyword-only</strong> (enforced by <code>*</code> separator).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Credentials are discovered automatically from environment variables, config files, or IAM/ADC. The SDK never accepts explicit credential parameters.</p>
-</div>
-<h2 id="publishing-messages">Publishing Messages<a class="headerlink" href="#publishing-messages" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">TopicClient</span><span class="p">,</span> <span class="n">Message</span>
+<p><code>send</code> is a synchronous operation: it waits for its internally batched send
+result. <code>Message</code> accepts bytes or strings through <code>with_body</code>, and metadata
+can be added as key/value pairs or a dictionary.</p>
+<h2 id="receive-and-acknowledge">Receive and acknowledge<a class="headerlink" href="#receive-and-acknowledge" title="Permanent link">&para;</a></h2>
+<p>This example consumes one message from an existing SQS queue. Receiving is
+blocking; ensure a message is available. Acknowledgment removes it from the
+queue. For GCP, use <code>provider="gcp"</code> and a full subscription name.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub.pubsub_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">SubscriptionClient</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="c1"># Build and send a message</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">Message</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="o">.</span><span class="n">with_body</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;{&quot;order_id&quot;: &quot;12345&quot;, &quot;amount&quot;: 99.99}&#39;</span><span class="p">)</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="o">.</span><span class="n">with_metadata</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">)</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="o">.</span><span class="n">with_metadata</span><span class="p">(</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">)</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="p">)</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;YOUR_QUEUE_URL&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">)</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">message</span> <span class="o">=</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">subscriber</span><span class="o">.</span><span class="n">send_ack</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">ack_id</span><span class="p">)</span>
 </span></code></pre></div>
-<h3 id="building-messages">Building Messages<a class="headerlink" href="#building-messages" title="Permanent link">&para;</a></h3>
-<p>Use the builder pattern to construct messages:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">Message</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="o">.</span><span class="n">with_body</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>  <span class="c1"># Accepts str or bytes</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="o">.</span><span class="n">with_metadata</span><span class="p">(</span><span class="s2">&quot;key1&quot;</span><span class="p">,</span> <span class="s2">&quot;value1&quot;</span><span class="p">)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="o">.</span><span class="n">with_metadata</span><span class="p">(</span><span class="s2">&quot;key2&quot;</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span><span class="p">)</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">)</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># Or provide metadata as a dict</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">Message</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="o">.</span><span class="n">with_body</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Binary data&quot;</span><span class="p">)</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="o">.</span><span class="n">with_metadata</span><span class="p">({</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/octet-stream&quot;</span><span class="p">,</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="p">})</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">)</span>
+<p>In an application, acknowledge only after successful processing. Use
+<code>send_nack</code> on failure when <code>can_nack()</code> reports support, so the message can
+be delivered again. Both current subscription providers support negative
+acknowledgment; the delivery timing remains provider-dependent.</p>
+<h2 id="batch-acknowledgments-and-negative-acknowledgments">Batch acknowledgments and negative acknowledgments<a class="headerlink" href="#batch-acknowledgments-and-negative-acknowledgments" title="Permanent link">&para;</a></h2>
+<p><code>send_acks</code> and <code>send_nacks</code> return <code>Future</code> objects. Wait on <code>.result()</code> to
+observe completion and errors. The following fragment assumes <code>subscriber</code>
+and successfully or unsuccessfully processed <code>Message</code> objects already exist:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Application fragment: successful and failed contain processed Messages.</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">subscriber</span><span class="o">.</span><span class="n">send_acks</span><span class="p">([</span><span class="n">message</span><span class="o">.</span><span class="n">ack_id</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">successful</span><span class="p">])</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">subscriber</span><span class="o">.</span><span class="n">send_nacks</span><span class="p">([</span><span class="n">message</span><span class="o">.</span><span class="n">ack_id</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">failed</span><span class="p">])</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </span></code></pre></div>
-<h2 id="receiving-messages">Receiving Messages<a class="headerlink" href="#receiving-messages" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">SubscriptionClient</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;orders-processor&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="c1"># Receive a message</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">message</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="c1"># Process the message</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="n">process_order</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="c1"># Acknowledge successful processing</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">client</span><span class="o">.</span><span class="n">send_ack</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">ack_id</span><span class="p">)</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="c1"># Negative acknowledge on failure (returns to queue)</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="n">client</span><span class="o">.</span><span class="n">send_nack</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">ack_id</span><span class="p">)</span>
-</span></code></pre></div>
-<h3 id="batch-acknowledgments">Batch Acknowledgments<a class="headerlink" href="#batch-acknowledgments" title="Permanent link">&para;</a></h3>
-<p>Process and acknowledge multiple messages efficiently:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="c1"># Receive multiple messages</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">msg</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="c1"># Process all messages</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">results</span> <span class="o">=</span> <span class="n">process_batch</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="c1"># Batch acknowledge</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="n">successful_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">ack_id</span> <span class="k">for</span> <span class="n">msg</span><span class="p">,</span> <span class="n">success</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span> <span class="k">if</span> <span class="n">success</span><span class="p">]</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="n">failed_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">ack_id</span> <span class="k">for</span> <span class="n">msg</span><span class="p">,</span> <span class="n">success</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">]</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send_acks</span><span class="p">(</span><span class="n">successful_ids</span><span class="p">)</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send_nacks</span><span class="p">(</span><span class="n">failed_ids</span><span class="p">)</span>
-</span></code></pre></div>
-<h3 id="negative-acknowledgment-with-visibility-timeout">Negative Acknowledgment with Visibility Timeout<a class="headerlink" href="#negative-acknowledgment-with-visibility-timeout" title="Permanent link">&para;</a></h3>
-<p>Control when a failed message becomes visible again:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">message</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="n">process_message</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="n">client</span><span class="o">.</span><span class="n">send_ack</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">ack_id</span><span class="p">)</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">except</span> <span class="n">RetryableError</span><span class="p">:</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="c1"># Return to queue, invisible for 60 seconds</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="n">client</span><span class="o">.</span><span class="n">send_nack</span><span class="p">(</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>            <span class="n">message</span><span class="o">.</span><span class="n">ack_id</span><span class="p">,</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>            <span class="n">visibility_timeout</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="p">)</span>
-</span></code></pre></div>
-<h3 id="subscription-attributes">Subscription Attributes<a class="headerlink" href="#subscription-attributes" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">attrs</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Approximate messages: </span><span class="si">{</span><span class="n">attrs</span><span class="o">.</span><span class="n">approximate_number_of_messages</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
-<h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
-<p>All pub/sub operations raise exceptions from the common <code>multicloud.common.exceptions</code> hierarchy:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">TopicClient</span><span class="p">,</span> <span class="n">Message</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.common.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">ResourceNotFoundException</span><span class="p">,</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">InvalidArgumentException</span><span class="p">,</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">UnAuthorizedException</span><span class="p">,</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">SubstrateSdkException</span><span class="p">,</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">)</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="n">message</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span><span class="o">.</span><span class="n">with_body</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="k">except</span> <span class="n">ResourceNotFoundException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic not found: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="k">except</span> <span class="n">UnAuthorizedException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Access denied: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    <span class="k">except</span> <span class="n">SubstrateSdkException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SDK error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th>Exception</th>
-<th>When Raised</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ResourceNotFoundException</code></td>
-<td>Topic or subscription does not exist</td>
-</tr>
-<tr>
-<td><code>InvalidArgumentException</code></td>
-<td>Empty body, invalid metadata, bad visibility timeout</td>
-</tr>
-<tr>
-<td><code>UnAuthorizedException</code></td>
-<td>Credentials missing, expired, or insufficient</td>
-</tr>
-<tr>
-<td><code>FailedPreconditionException</code></td>
-<td>Client shutdown, batch handler error</td>
-</tr>
-<tr>
-<td><code>UnknownException</code></td>
-<td>Unmapped provider error</td>
-</tr>
-</tbody>
-</table>
-<h2 id="switching-providers">Switching Providers<a class="headerlink" href="#switching-providers" title="Permanent link">&para;</a></h2>
-<p>Change providers by modifying only the <code>provider</code> parameter:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># AWS</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># GCP</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;gcp&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-central1&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># Ali</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;ali&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;cn-hangzhou&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span></code></pre></div>
-<p>The rest of your code remains identical — the SDK handles all provider-specific differences.</p>
-<h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
-<p>A full round-trip: publish, receive, acknowledge.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multicloud.pubsub</span><span class="w"> </span><span class="kn">import</span> <span class="n">TopicClient</span><span class="p">,</span> <span class="n">SubscriptionClient</span><span class="p">,</span> <span class="n">Message</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Publish a message</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">publisher</span><span class="p">:</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        <span class="n">Message</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="o">.</span><span class="n">with_body</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;{&quot;order_id&quot;: &quot;12345&quot;, &quot;amount&quot;: 99.99}&#39;</span><span class="p">)</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="o">.</span><span class="n">with_metadata</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">)</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="p">)</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="n">publisher</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Message published&quot;</span><span class="p">)</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
-</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="c1"># Receive and process</span>
-</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="k">with</span> <span class="n">SubscriptionClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">subscription_name</span><span class="o">=</span><span class="s2">&quot;orders-processor&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
-</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="n">message</span> <span class="o">=</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>
-</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    <span class="c1"># Process and acknowledge</span>
-</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>    <span class="n">process_order</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
-</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="n">subscriber</span><span class="o">.</span><span class="n">send_ack</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">ack_id</span><span class="p">)</span>
-</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Message acknowledged&quot;</span><span class="p">)</span>
-</span></code></pre></div>
-<h2 id="client-lifecycle">Client Lifecycle<a class="headerlink" href="#client-lifecycle" title="Permanent link">&para;</a></h2>
-<p>Both <code>TopicClient</code> and <code>SubscriptionClient</code> support the context manager protocol:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Preferred — automatic cleanup and batch flushing</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">with</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># Manual cleanup</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">TopicClient</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;aws&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="k">try</span><span class="p">:</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="k">finally</span><span class="p">:</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># Flushes pending batches</span>
-</span></code></pre></div>
+<p><code>send_nack</code> and <code>send_nacks</code> accept <code>visibility_timeout=timedelta(...)</code>.
+A per-call timeout overrides the subscription default; the implementation
+clamps to SQS's 43,200-second or Pub/Sub's 600-second limit. Lazy nack mode
+waits for the existing visibility/deadline rather than making a native update.
+These operations request redelivery; they do not guarantee exactly-once
+processing or a precise delivery time.</p>
+<h2 id="attributes-and-retry-classification">Attributes and retry classification<a class="headerlink" href="#attributes-and-retry-classification" title="Permanent link">&para;</a></h2>
+<p><code>get_attributes()</code> returns subscription metadata. The current providers do
+not populate <code>approximate_number_of_messages</code>, so it can be <code>None</code>. Do not
+treat it as a guaranteed queue-depth metric.</p>
+<p><code>is_retryable(error)</code> is a classification helper, not a promise to retry every
+failed API call. Currently the AWS subscription implementation returns
+<code>False</code>; GCP recognizes <code>DeadlineExceeded</code>. Use the <a href="../../api/pubsub/">API reference</a>
+for exact signatures and the <a href="../../roadmap/#pubsub">roadmap</a>
+for the complete operation inventory.</p>
+<h2 id="errors-and-cleanup">Errors and cleanup<a class="headerlink" href="#errors-and-cleanup" title="Permanent link">&para;</a></h2>
+<p>Public operations map provider failures to <code>multicloud.common.exceptions</code>
+such as <code>ResourceNotFoundException</code>, <code>InvalidArgumentException</code>, and
+<code>UnAuthorizedException</code>. For batch acknowledgments, observe errors through
+the returned Future as well as errors raised before enqueueing.</p>
+<p>Both clients support <code>with</code>. Closing flushes pending sends or acknowledgments
+and releases resources; it does not delete the topic, queue, or subscription.</p>
 
 
 
