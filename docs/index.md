@@ -55,7 +55,7 @@ before running the example.
 
 ## Community
 
-[Meet the maintainers and contributors](community.md), and learn how to participate.
+[Meet the team](team.md) and reach out with questions about the SDK or contributing.
 
 - [GitHub repository](https://github.com/salesforce/multicloud-py)
 - [Issues and questions](https://github.com/salesforce/multicloud-py/issues)

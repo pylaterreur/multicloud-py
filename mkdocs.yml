@@ -136,7 +136,7 @@ nav:
       - multicloud.docstore: api/docstore.md
       - multicloud.pubsub: api/pubsub.md
       - multicloud.common: api/common.md
-  - Community: community.md
+  - Team: team.md
   - Maintainers:
       - Releasing: maintainers/releasing.md
       - Website: maintainers/website.md
