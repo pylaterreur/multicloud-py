@@ -55,6 +55,8 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../stylesheets/site.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -351,6 +353,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="../team/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Team
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -378,6 +399,8 @@
         <div class="md-main__inner md-grid">
           
             
+              
+                
               
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
@@ -534,22 +557,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#current-status" class="md-nav__link">
+  <a href="#blob-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current Status
+        Blob Storage
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Current Status">
+    <nav class="md-nav" aria-label="Blob Storage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#blob-storage-bucketclient" class="md-nav__link">
+  <a href="#upload-download-and-copy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Blob Storage (BucketClient)
+        Upload, download, and copy
       
     </span>
   </a>
@@ -557,10 +580,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sts-stsclient" class="md-nav__link">
+  <a href="#listing-and-metadata" class="md-nav__link">
     <span class="md-ellipsis">
       
-        STS (StsClient)
+        Listing and metadata
       
     </span>
   </a>
@@ -568,10 +591,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iam-iamclient" class="md-nav__link">
+  <a href="#object-protection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IAM (IamClient)
+        Object protection
       
     </span>
   </a>
@@ -579,10 +602,87 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pubsub-topicclient-subscriptionclient" class="md-nav__link">
+  <a href="#multipart-upload" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PubSub (TopicClient / SubscriptionClient)
+        Multipart upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-download-and-copy_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload, download, and copy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listing-and-metadata_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listing and metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-protection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object protection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multipart-upload_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multipart upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-lifecycle_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client lifecycle
       
     </span>
   </a>
@@ -595,10 +695,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#milestones" class="md-nav__link">
+  <a href="#sts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Milestones
+        STS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IAM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pub/Sub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document Store
       
     </span>
   </a>
@@ -624,6 +757,8 @@
       
         
           
+        
+      
         
       
         
@@ -729,6 +864,34 @@
     
   
     STS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/iam-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IAM
   
 
     
@@ -934,6 +1097,8 @@
       
         
       
+        
+      
     
     
     
@@ -1079,6 +1244,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../api/docstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    multicloud.docstore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api/pubsub/" class="md-nav__link">
         
   
@@ -1141,6 +1334,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Team
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
@@ -1161,10 +1381,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -1182,8 +1402,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1264,7 +1484,9 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1283,22 +1505,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#current-status" class="md-nav__link">
+  <a href="#blob-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current Status
+        Blob Storage
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Current Status">
+    <nav class="md-nav" aria-label="Blob Storage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#blob-storage-bucketclient" class="md-nav__link">
+  <a href="#upload-download-and-copy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Blob Storage (BucketClient)
+        Upload, download, and copy
       
     </span>
   </a>
@@ -1306,10 +1528,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sts-stsclient" class="md-nav__link">
+  <a href="#listing-and-metadata" class="md-nav__link">
     <span class="md-ellipsis">
       
-        STS (StsClient)
+        Listing and metadata
       
     </span>
   </a>
@@ -1317,10 +1539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iam-iamclient" class="md-nav__link">
+  <a href="#object-protection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IAM (IamClient)
+        Object protection
       
     </span>
   </a>
@@ -1328,10 +1550,87 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pubsub-topicclient-subscriptionclient" class="md-nav__link">
+  <a href="#multipart-upload" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PubSub (TopicClient / SubscriptionClient)
+        Multipart upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-download-and-copy_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload, download, and copy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listing-and-metadata_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listing and metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-protection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object protection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multipart-upload_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multipart upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-lifecycle_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client lifecycle
       
     </span>
   </a>
@@ -1344,10 +1643,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#milestones" class="md-nav__link">
+  <a href="#sts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Milestones
+        STS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IAM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pub/Sub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document Store
       
     </span>
   </a>
@@ -1368,6 +1700,8 @@
               <article class="md-content__inner md-typeset">
                 
                   
+  
+
 
 
   
@@ -1380,15 +1714,29 @@
 
 
 <h1 id="feature-roadmap">Feature Roadmap<a class="headerlink" href="#feature-roadmap" title="Permanent link">&para;</a></h1>
-<p>Python Multi-Cloud SDK roadmap — targeting <strong>dev-ready by July 2026</strong>.</p>
-<h2 id="current-status">Current Status<a class="headerlink" href="#current-status" title="Permanent link">&para;</a></h2>
-<p>✅ = Available &nbsp; 🚧 = In Progress (interface defined, provider not implemented)</p>
-<h3 id="blob-storage-bucketclient">Blob Storage (<code>BucketClient</code>)<a class="headerlink" href="#blob-storage-bucketclient" title="Permanent link">&para;</a></h3>
+<p>Browse the SDK APIs by service. Support describes whether an operation is
+implemented; provider-specific behavior is explained in the notes.</p>
+<div class="roadmap">
+<nav aria-label="Jump to a service" class="roadmap-nav">
+<a href="#blob-storage">Blob Storage</a>
+<a href="#sts">STS</a>
+<a href="#iam">IAM</a>
+<a href="#pubsub">Pub/Sub</a>
+<a href="#document-store">Document Store</a>
+</nav>
+<p class="support-legend"><span class="api-support api-support--yes" aria-hidden="true">✓</span> Supported <span class="api-support api-support--no" aria-hidden="true">—</span> Unsupported</p>
+<h2 id="blob-storage">Blob Storage<a class="headerlink" href="#blob-storage" title="Permanent link">&para;</a></h2>
+<p><a href="../guides/blobstore-guide/">Usage guide</a> · <a href="../api/blob/">API reference</a></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sync client</label><label for="__tabbed_1_2">Async client</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><code>BucketClient</code> supports every operation below on AWS and GCP.</p>
+<h4 id="upload-download-and-copy">Upload, download, and copy<a class="headerlink" href="#upload-download-and-copy" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
 <th>API</th>
-<th>Description</th>
+<th>Purpose</th>
 <th style="text-align: center;">AWS</th>
 <th style="text-align: center;">GCP</th>
 </tr>
@@ -1396,144 +1744,506 @@
 <tbody>
 <tr>
 <td><code>upload</code></td>
-<td>Upload bytes or file-like object to a key</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Upload bytes or a binary stream</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>upload_from_path</code></td>
-<td>Upload from a local file path</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Upload from a local file</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>download</code></td>
-<td>Download object content to memory</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Download object content</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>download_to_path</code></td>
-<td>Download directly to a local file path</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Download to a local path</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>download_to_file</code></td>
-<td>Download directly to a file-like object</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Download to a binary file</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>download_stream</code></td>
-<td>Streaming download (lazy chunk iteration)</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>delete</code></td>
-<td>Delete a single object (idempotent)</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>delete_objects</code></td>
-<td>Batch delete multiple objects</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Iterate content chunks</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>copy</code></td>
-<td>Server-side copy to another bucket</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Copy to another bucket</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>copy_from</code></td>
-<td>Server-side copy from another bucket</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Copy from another bucket</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
-<td><code>list_page</code></td>
-<td>List blobs with prefix/delimiter/pagination</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td><code>delete</code></td>
+<td>Delete one object</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
-<td><code>does_object_exist</code></td>
-<td>Check if an object exists</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>does_bucket_exist</code></td>
-<td>Check if the bucket exists</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>get_tags</code></td>
-<td>Retrieve object tags</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>set_tags</code></td>
-<td>Set/replace object tags</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>generate_presigned_url</code></td>
-<td>Generate presigned URL for upload or download</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>list_blob_versions</code></td>
-<td>List all versions of an object <sup id="fnref:order"><a class="footnote-ref" href="#fn:order">1</a></sup></td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>initiate_multipart_upload</code></td>
-<td>Start a multipart upload session</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>upload_part</code></td>
-<td>Upload a single part</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>complete_multipart_upload</code></td>
-<td>Assemble parts into the final object</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>list_parts</code></td>
-<td>List uploaded parts for a multipart upload</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
-</tr>
-<tr>
-<td><code>abort_multipart_upload</code></td>
-<td>Abort and discard uploaded parts</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td><code>delete_objects</code></td>
+<td>Delete multiple objects</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 </tbody>
 </table>
-<h3 id="sts-stsclient">STS (<code>StsClient</code>)<a class="headerlink" href="#sts-stsclient" title="Permanent link">&para;</a></h3>
+<h4 id="listing-and-metadata">Listing and metadata<a class="headerlink" href="#listing-and-metadata" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
 <th>API</th>
-<th>Description</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_page</code></td>
+<td>List with prefix, delimiter, and pagination</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>list_blob_versions</code></td>
+<td>List object versions</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>does_object_exist</code></td>
+<td>Check object existence</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>does_bucket_exist</code></td>
+<td>Check bucket existence</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>get_metadata</code></td>
+<td>Read object metadata</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>get_tags</code></td>
+<td>Read tags</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>set_tags</code></td>
+<td>Replace tags</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>generate_presigned_url</code></td>
+<td>Generate a signed upload or download URL</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="object-protection">Object protection<a class="headerlink" href="#object-protection" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_object_lock</code></td>
+<td>Read retention and legal hold</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>update_object_retention</code></td>
+<td>Update retention</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>update_legal_hold</code></td>
+<td>Update legal hold</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="multipart-upload">Multipart upload<a class="headerlink" href="#multipart-upload" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initiate_multipart_upload</code></td>
+<td>Start a multipart upload</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>upload_part</code></td>
+<td>Upload a part</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>complete_multipart_upload</code></td>
+<td>Complete a multipart upload</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>list_parts</code></td>
+<td>List uploaded parts</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>abort_multipart_upload</code></td>
+<td>Abort a multipart upload</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="client-lifecycle">Client lifecycle<a class="headerlink" href="#client-lifecycle" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>close</code></td>
+<td>Release client resources</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>with</code> for automatic client cleanup.</p>
+</div>
+<div class="tabbed-block">
+<p><code>AsyncBucketClient</code> supports every operation below on AWS and GCP.</p>
+<h4 id="upload-download-and-copy_1">Upload, download, and copy<a class="headerlink" href="#upload-download-and-copy_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upload</code></td>
+<td>Upload bytes or a binary stream</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>upload_from_path</code></td>
+<td>Upload from a local file</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>download</code></td>
+<td>Download object content</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>download_to_path</code></td>
+<td>Download to a local path</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>download_to_file</code></td>
+<td>Download to a binary file</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>download_stream</code></td>
+<td>Iterate content chunks</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>copy</code></td>
+<td>Copy to another bucket</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>copy_from</code></td>
+<td>Copy from another bucket</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>Delete one object</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>delete_objects</code></td>
+<td>Delete multiple objects</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="listing-and-metadata_1">Listing and metadata<a class="headerlink" href="#listing-and-metadata_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_page</code></td>
+<td>List with prefix, delimiter, and pagination</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>list_blob_versions</code></td>
+<td>List object versions</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>does_object_exist</code></td>
+<td>Check object existence</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>does_bucket_exist</code></td>
+<td>Check bucket existence</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>get_metadata</code></td>
+<td>Read object metadata</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>get_tags</code></td>
+<td>Read tags</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>set_tags</code></td>
+<td>Replace tags</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>generate_presigned_url</code></td>
+<td>Generate a signed upload or download URL</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="object-protection_1">Object protection<a class="headerlink" href="#object-protection_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_object_lock</code></td>
+<td>Read retention and legal hold</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>update_object_retention</code></td>
+<td>Update retention</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>update_legal_hold</code></td>
+<td>Update legal hold</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="multipart-upload_1">Multipart upload<a class="headerlink" href="#multipart-upload_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initiate_multipart_upload</code></td>
+<td>Start a multipart upload</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>upload_part</code></td>
+<td>Upload a part</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>complete_multipart_upload</code></td>
+<td>Complete a multipart upload</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>list_parts</code></td>
+<td>List uploaded parts</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>abort_multipart_upload</code></td>
+<td>Abort a multipart upload</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="directory-operations">Directory operations<a class="headerlink" href="#directory-operations" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upload_directory</code></td>
+<td>Upload local directory contents</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>download_directory</code></td>
+<td>Download objects under a prefix</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>delete_directory</code></td>
+<td>Delete objects under a prefix</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="client-lifecycle_1">Client lifecycle<a class="headerlink" href="#client-lifecycle_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>close</code></td>
+<td>Release client resources</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+</tbody>
+</table>
+<p>Await coroutine operations and use <code>async with</code> for cleanup.
+<code>list_blob_versions()</code> returns an async iterator directly:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">async</span> <span class="k">for</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">list_blob_versions</span><span class="p">(</span><span class="s2">&quot;report.pdf&quot;</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">version_id</span><span class="p">)</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="info">
+<summary>Blob Storage provider notes</summary>
+<p>Object protection needs appropriate resource configuration and permissions.
+AWS uses ETag write matching and GCP uses generation/version matching. A
+standalone unsupported token raises an error; when both <code>if_match</code> and
+<code>if_version_match</code> are supplied, each provider uses its supported token.
+Version ordering remains provider-native; use <code>is_latest</code> or sort explicitly.</p>
+</details>
+<h2 id="sts">STS<a class="headerlink" href="#sts" title="Permanent link">&para;</a></h2>
+<p><code>StsClient</code> provides identity and temporary-credential operations.
+<a href="../guides/sts-guide/">Usage guide</a> · <a href="../api/sts/">API reference</a></p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
 <th style="text-align: center;">AWS</th>
 <th style="text-align: center;">GCP</th>
 </tr>
@@ -1541,42 +2251,83 @@
 <tbody>
 <tr>
 <td><code>get_caller_identity</code></td>
-<td>Return identity info for current credentials</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Identify the caller</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>assume_role</code></td>
-<td>Assume a role and return temporary credentials</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Obtain temporary role credentials</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>get_access_token</code></td>
-<td>Retrieve a fresh access token</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Obtain refreshed or scoped credentials</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>generate_service_account_token</code></td>
-<td>Generate token via service account impersonation</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Impersonate a service account</td>
+<td style="text-align: center;"><span class="api-support api-support--no" title="Unsupported"><span aria-hidden="true">—</span><span class="support-label">Unsupported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>assume_role_with_web_identity</code></td>
-<td>Exchange OIDC/JWT token for temporary credentials</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Exchange a web-identity token</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td>Release client resources</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 </tbody>
 </table>
-<h3 id="iam-iamclient">IAM (<code>IamClient</code>)<a class="headerlink" href="#iam-iamclient" title="Permanent link">&para;</a></h3>
+<p><code>StsUtilities</code> exposes the following additional operation:</p>
 <table>
 <thead>
 <tr>
 <th>API</th>
-<th>Description</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create_signed_auth_request</code></td>
+<td>Create a signed caller-identity authentication request</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--no" title="Unsupported"><span aria-hidden="true">—</span><span class="support-label">Unsupported</span></span></td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>STS provider notes</summary>
+<p>All operations marked supported have implementations. Credential types,
+permissions, and token parameters are prerequisites, not a separate support
+level. GCP identity/audience tokens need compatible service-account or
+impersonated credentials; scoped tokens need a service-account email.</p>
+<p>AWS <code>get_access_token</code> uses session tokens and ignores <code>audience</code> and
+<code>scopes</code>. GCP <code>assume_role</code> impersonates a service account and ignores
+<code>session_name</code>, <code>external_id</code>, <code>policy</code>, and <code>tags</code>; use the implemented
+<code>credential_scope</code> path for downscoping. Token lifetimes remain provider-specific.</p>
+<p>AWS <code>generate_service_account_token</code> and GCP
+<code>create_signed_auth_request</code> explicitly raise <code>UnsupportedOperationException</code>.
+These are the two unsupported provider paths shown above.</p>
+</details>
+<h2 id="iam">IAM<a class="headerlink" href="#iam" title="Permanent link">&para;</a></h2>
+<p><code>IamClient</code> manages identities and permissions.
+<a href="../guides/iam-guide/">Usage guide</a> · <a href="../api/iam/">API reference</a></p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Purpose</th>
 <th style="text-align: center;">AWS</th>
 <th style="text-align: center;">GCP</th>
 </tr>
@@ -1584,54 +2335,72 @@
 <tbody>
 <tr>
 <td><code>create_identity</code></td>
-<td>Create an identity (idempotent)</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Create or resolve an identity</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>get_identity</code></td>
-<td>Retrieve identity identifier</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Read its identifier</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>delete_identity</code></td>
 <td>Delete an identity</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>attach_inline_policy</code></td>
-<td>Attach an inline policy to an identity</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Attach policy permissions</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>get_inline_policy_details</code></td>
-<td>Retrieve an inline policy document</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Read a policy document or binding</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>get_attached_policies</code></td>
-<td>List policies attached to an identity</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>List attached policy names or roles</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>remove_policy</code></td>
-<td>Remove a policy from an identity</td>
-<td style="text-align: center;">✅</td>
-<td style="text-align: center;">✅</td>
+<td>Remove policy permissions</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td>Release client resources</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 </tbody>
 </table>
-<h3 id="pubsub-topicclient-subscriptionclient">PubSub (<code>TopicClient</code> / <code>SubscriptionClient</code>)<a class="headerlink" href="#pubsub-topicclient-subscriptionclient" title="Permanent link">&para;</a></h3>
+<details class="info">
+<summary>IAM provider notes</summary>
+<p>All listed IAM APIs are implemented. Their policy representations differ:
+AWS uses named inline policies; GCP uses project-level role bindings.
+On GCP, lookup/removal uses role names such as <code>roles/storage.objectViewer</code>.</p>
+<p>GCP applies ALLOW statements, skips DENY statements, rejects conditions on
+translated ALLOW statements, and does not use statement resources to restrict
+the binding. Read the IAM guide before applying a policy: the same method
+name does not guarantee equivalent policy semantics on every provider.</p>
+</details>
+<h2 id="pubsub">Pub/Sub<a class="headerlink" href="#pubsub" title="Permanent link">&para;</a></h2>
+<p>Publish with <code>TopicClient</code>; receive and acknowledge with <code>SubscriptionClient</code>.
+<a href="../guides/pubsub-guide/">Usage guide</a> · <a href="../api/pubsub/">API reference</a></p>
 <table>
 <thead>
 <tr>
 <th>API</th>
-<th>Description</th>
+<th>Purpose</th>
 <th style="text-align: center;">AWS</th>
 <th style="text-align: center;">GCP</th>
 </tr>
@@ -1639,102 +2408,165 @@
 <tbody>
 <tr>
 <td><code>send</code></td>
-<td>Send a single message to a topic</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Publish a message (TopicClient)</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>receive</code></td>
-<td>Receive a message from a subscription (blocking)</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Receive a message (SubscriptionClient)</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>send_ack</code></td>
-<td>Acknowledge a single message</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Acknowledge one message</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>send_acks</code></td>
-<td>Batch acknowledge multiple messages</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Batch acknowledgments; returns a Future</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>send_nack</code></td>
-<td>Negatively acknowledge (requeue for redelivery)</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Make one message available for redelivery</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>send_nacks</code></td>
-<td>Batch negative acknowledge</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Batch negative acknowledgments; returns a Future</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>can_nack</code></td>
-<td>Check if provider supports negative acknowledgment</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Check negative-acknowledgment capability</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>get_attributes</code></td>
-<td>Retrieve subscription attributes</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Read subscription metadata</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
 <td><code>is_retryable</code></td>
-<td>Check if an error is transient/retryable</td>
-<td style="text-align: center;">🚧</td>
-<td style="text-align: center;">🚧</td>
+<td>Classify a failure for retry</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td>Flush pending work and release the client</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 </tbody>
 </table>
-<h2 id="milestones">Milestones<a class="headerlink" href="#milestones" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>Pub/Sub provider notes</summary>
+<p>AWS publishing selects <code>awssns</code> or <code>awssqs</code>; AWS subscriptions use <code>aws</code>.
+GCP uses <code>gcp</code>. Both clients expose <code>close</code>; the other rows identify their
+relevant client. Batch acknowledgments return Futures whose results should
+be observed. Redelivery follows provider visibility/deadline limits.</p>
+<p>The current <code>get_attributes</code> implementations leave
+<code>approximate_number_of_messages</code> unset. <code>is_retryable</code> classifies errors;
+it does not promise to retry every failed operation.</p>
+</details>
+<h2 id="document-store">Document Store<a class="headerlink" href="#document-store" title="Permanent link">&para;</a></h2>
+<p><code>DocStoreClient</code> supports document operations and batching through <code>actions()</code>.
+<a href="../api/docstore/">API reference</a></p>
 <table>
 <thead>
 <tr>
-<th>Target</th>
-<th>Service</th>
-<th>Milestone</th>
+<th>API</th>
+<th>Purpose</th>
+<th style="text-align: center;">AWS</th>
+<th style="text-align: center;">GCP</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>July 2026</td>
-<td>Blob Storage</td>
-<td>AWS + GCP dev-ready</td>
+<td><code>actions</code></td>
+<td>Build a list of document actions</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
-<td>July 2026</td>
-<td>STS</td>
-<td>AWS + GCP dev-ready</td>
+<td><code>create</code></td>
+<td>Create a document</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
-<td>July 2026</td>
-<td>PubSub</td>
-<td>AWS + GCP dev-ready</td>
+<td><code>replace</code></td>
+<td>Replace an existing document</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 <tr>
-<td>July 2026</td>
-<td>IAM</td>
-<td>AWS + GCP dev-ready</td>
+<td><code>put</code></td>
+<td>Upsert a document</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>Delete a document</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>get</code></td>
+<td>Read into a supplied document</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>batch_get</code></td>
+<td>Read multiple documents</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>batch_put</code></td>
+<td>Upsert multiple documents</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>batch_delete</code></td>
+<td>Delete multiple documents</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td>Release client resources</td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
+<td style="text-align: center;"><span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span></td>
 </tr>
 </tbody>
 </table>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:order">
-<p>Version order is provider-native and not normalised, so it differs
-between clouds. <code>is_latest</code> identifies the current version on every provider,
-and <code>last_modified</code> is populated on every entry, so sort on it if order matters.&#160;<a class="footnote-backref" href="#fnref:order" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
+<details class="info">
+<summary>Batching within DocStoreClient</summary>
+<p><code>actions()</code> returns a fluent builder within the DocStore API. Chain
+<code>create</code>, <code>replace</code>, <code>put</code>, <code>delete</code>, or <code>get</code> and execute with <code>run()</code>.
+<code>enable_atomic_writes()</code> requests transactional writes, and <code>before_do()</code>
+registers a before-operation hook. These belong to DocStore batching,
+rather than a separate service interface.</p>
+<p>Revision checks, supported field shapes, and transaction limits depend on
+the provider. Query/filter/order/pagination APIs are not exposed by the
+current public <code>DocStoreClient</code>.</p>
+</details>
 </div>
+<p>Ali provider distributions for Blob Storage, STS, and Pub/Sub remain placeholders.
+The tables show the implemented AWS and GCP providers. Reviewed October 22, 2026.</p>
 
 
 
@@ -1742,8 +2574,13 @@ and <code>last_modified</code> is populated on every entry, so sort on it if ord
 
 
 
+  
+  
 
 
+
+
+  
 
 
 

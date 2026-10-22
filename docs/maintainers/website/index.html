@@ -53,6 +53,8 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../../stylesheets/site.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -346,6 +348,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../../team/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Team
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -511,6 +532,8 @@
       
         
       
+        
+      
     
     
     
@@ -608,6 +631,34 @@
     
   
     STS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/iam-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IAM
   
 
     
@@ -813,6 +864,8 @@
       
         
       
+        
+      
     
     
     
@@ -958,6 +1011,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/docstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    multicloud.docstore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/pubsub/" class="md-nav__link">
         
   
@@ -1018,6 +1099,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Team
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1045,10 +1153,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
@@ -1066,8 +1174,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1183,10 +1291,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publish-a-new-version" class="md-nav__link">
+  <a href="#automatic-publishing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Publish a new version
+        Automatic publishing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-publishing-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual publishing fallback
       
     </span>
   </a>
@@ -1258,10 +1377,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publish-a-new-version" class="md-nav__link">
+  <a href="#automatic-publishing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Publish a new version
+        Automatic publishing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-publishing-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual publishing fallback
       
     </span>
   </a>
@@ -1310,7 +1440,9 @@
 locked tooling in the <code>docs</code> dependency group in <code>pyproject.toml</code> and <code>uv.lock</code>.</p>
 <p>GitHub Pages serves generated HTML from the <strong><code>site</code> branch's <code>/docs</code> folder</strong>,
 matching the publishing-source layout used by MultiCloudJ. The Documentation
-Actions workflow validates source builds; it does not deploy the website.</p>
+Actions workflow validates pull requests and automatically publishes successful
+builds after changes merge into <code>main</code>. The Pages source setting is permanent;
+it does not need to be selected again for each update.</p>
 <h2 id="preview-and-validate">Preview and validate<a class="headerlink" href="#preview-and-validate" title="Permanent link">&para;</a></h2>
 <p>From the repository root:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>run<span class="w"> </span>--frozen<span class="w"> </span>--group<span class="w"> </span>docs<span class="w"> </span>mkdocs<span class="w"> </span>serve
@@ -1320,7 +1452,36 @@ Actions workflow validates source builds; it does not deploy the website.</p>
 <code>site/</code> directory. API reference pages are generated from source docstrings
 with mkdocstrings; planning documents under <code>docs/superpowers/</code> are excluded.
 Do not commit generated output to <code>main</code> or replace its Markdown <code>docs/</code> tree.</p>
-<h2 id="publish-a-new-version">Publish a new version<a class="headerlink" href="#publish-a-new-version" title="Permanent link">&para;</a></h2>
+<h2 id="automatic-publishing">Automatic publishing<a class="headerlink" href="#automatic-publishing" title="Permanent link">&para;</a></h2>
+<p>Merge a documentation or SDK source PR into <code>main</code>. The Documentation workflow:</p>
+<ol>
+<li>Builds the exact merged commit with the locked documentation dependencies
+   and <code>mkdocs build --strict</code>.</li>
+<li>Transfers the validated output to a separate publishing job, which replaces
+   only the <code>site</code> branch's generated <code>/docs</code> tree and updates <code>SOURCE_COMMIT</code>.</li>
+<li>Pushes a normal commit to <code>site</code>, preserving its history and <code>/docs/.nojekyll</code>.</li>
+<li>Explicitly requests a GitHub Pages build, which deploys <code>site:/docs</code>.</li>
+</ol>
+<p>No separate generated-site PR is needed. Pull requests only validate the build;
+they do not receive publishing permissions. Publishing jobs run one at a time
+and skip an older source commit when <code>main</code> has advanced. The publishing job
+uses the built-in <code>GITHUB_TOKEN</code> with <code>contents: write</code> and <code>pages: write</code>;
+no personal access token is needed. GitHub does not automatically start a
+Pages build for commits pushed with that token, so the explicit build request
+is required. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#troubleshooting-publishing-from-a-branch">GitHub's publishing-source documentation</a>
+and <a href="https://docs.github.com/en/rest/pages/pages#request-a-github-pages-build">Pages build API</a>.</p>
+<p>Check the <strong>Documentation</strong> run first, then the <strong>pages build and deployment</strong>
+run. A successful source build alone does not confirm that Pages has deployed.
+If publishing fails, fix the reported configuration or permission error and
+rerun the workflow on current <code>main</code> using <strong>Actions → Documentation → Run
+workflow</strong>. A manual run on another branch validates without publishing. A
+retry requests deployment even when the generated files are already current.</p>
+<p>The repository must allow the publishing job to write to <code>site</code>. If the
+<code>github-pages</code> environment restricts deployment branches, it must allow <code>main</code>,
+where the publishing job runs, and <code>site</code>, where GitHub's Pages build runs.
+Keep Pages configured to <strong>Deploy from a branch → site → /docs</strong>. The workflow
+checks that setting and reports an error if it differs.</p>
+<h2 id="manual-publishing-fallback">Manual publishing fallback<a class="headerlink" href="#manual-publishing-fallback" title="Permanent link">&para;</a></h2>
 <p>First merge documentation or SDK changes into <code>main</code>. Build from that merged
 commit in a clean checkout or isolated worktree; preserve existing local work.
 Use a fresh temporary build directory and a separate publishing worktree.</p>
@@ -1345,8 +1506,9 @@ available. Fail-fast mode prevents a failed build from reaching publication.</p>
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">/docs&quot;</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>cp<span class="w"> </span>-R<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BUILD_DIR</span><span class="s2">/.&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">/docs/&quot;</span>
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>touch<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">/docs/.nojekyll&quot;</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>git<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">&quot;</span><span class="w"> </span>add<span class="w"> </span>docs
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>git<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">&quot;</span><span class="w"> </span>diff<span class="w"> </span>--cached<span class="w"> </span>--stat
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SOURCE_SHA</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">/SOURCE_COMMIT&quot;</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>git<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">&quot;</span><span class="w"> </span>add<span class="w"> </span>docs<span class="w"> </span>SOURCE_COMMIT
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>git<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_DIR</span><span class="s2">&quot;</span><span class="w"> </span>diff<span class="w"> </span>--cached<span class="w"> </span>--stat
 </span></code></pre></div>
 <p>Review the complete generated change, verify the homepage and at least one
 API page, and confirm that obsolete generated pages are removed. If the staged
@@ -1366,12 +1528,13 @@ transformation. No force-push or <code>mkdocs gh-deploy</code> is needed. Use no
 worktree cleanup after retaining any needed review artifacts.</p>
 <h2 id="one-time-switch-from-actions-deployment">One-time switch from Actions deployment<a class="headerlink" href="#one-time-switch-from-actions-deployment" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Merge the change that removes artifact deployment from the Documentation
-   workflow. Wait for any older in-flight Actions deployments to finish.</li>
+<li>Wait for any older in-flight Actions artifact deployments to finish.</li>
 <li>Initialize <code>site</code> with the validated static build in <code>/docs</code>, including
    <code>/docs/.nojekyll</code>, if that branch does not yet exist.</li>
 <li>In repository <strong>Settings → Pages</strong>, choose <strong>Deploy from a branch</strong>,
    select <strong>site</strong>, select <strong>/docs</strong>, and save.</li>
+<li>Allow <code>main</code> and <code>site</code> in the <code>github-pages</code> environment's branch rules
+   if that environment restricts deployment branches.</li>
 <li>Check the Pages build and the public homepage and guides. Enable
    <strong>Enforce HTTPS</strong> when available.</li>
 </ol>
@@ -1384,7 +1547,8 @@ empty and do not add a <code>CNAME</code> for <code>opensource.salesforce.com</c
 </span></code></pre></div>
 <p>The configuration should report <code>build_type: legacy</code> and source branch <code>site</code>,
 path <code>/docs</code>. GitHub may display its own Pages build as an Actions run even
-with this branch-based setting; it is separate from our validation workflow.</p>
+with this branch-based setting; it follows our Documentation publishing job.
+The source selection remains saved for all future deployments.</p>
 
 
 
