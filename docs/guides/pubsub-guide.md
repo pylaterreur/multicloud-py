@@ -101,7 +101,7 @@ treat it as a guaranteed queue-depth metric.
 `is_retryable(error)` is a classification helper, not a promise to retry every
 failed API call. Currently the AWS subscription implementation returns
 `False`; GCP recognizes `DeadlineExceeded`. Use the [API reference](../api/pubsub.md)
-for exact signatures and the [roadmap](../roadmap.md#pubsub-topicclient-subscriptionclient)
+for exact signatures and the [roadmap](../roadmap.md#pubsub)
 for the complete operation inventory.
 
 ## Errors and cleanup

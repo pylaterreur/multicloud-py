@@ -1,189 +1,290 @@
+---
+hide:
+  - toc
+---
+
 # Feature Roadmap
 
-## Current implementation status
+Browse the SDK APIs by service. Support describes whether an operation is
+implemented; provider-specific behavior is explained in the notes.
 
-Audited on **October 22, 2026** against the public SDK's client interfaces,
-driver contracts, provider implementations, and checked-in tests. This is an
-implementation inventory, not a claim that every parameter has identical
-semantics on every provider or that all operations were live-tested during
-this documentation review.
+<div class="roadmap" markdown="1">
 
-**Supported** = implemented; **Conditional** = implemented with the requirements
-noted below; **Unsupported** = explicitly rejected by this provider;
-**Not exposed** = absent from the public client. Ali provider packages remain
-placeholders and are planned, not implemented, for Blob Storage, STS, and Pub/Sub.
+<nav class="roadmap-nav" aria-label="Jump to a service">
+<a href="#blob-storage">Blob Storage</a>
+<a href="#sts">STS</a>
+<a href="#iam">IAM</a>
+<a href="#pubsub">Pub/Sub</a>
+<a href="#document-store">Document Store</a>
+</nav>
 
-## Blob Storage (`BucketClient`)
+<p class="support-legend"><span class="api-support api-support--yes" aria-hidden="true">✓</span> Supported <span class="api-support api-support--no" aria-hidden="true">—</span> Unsupported</p>
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `upload` | Upload bytes or a binary stream | Supported | Supported |
-| `upload_from_path` | Upload from a local file | Supported | Supported |
-| `download` | Download object content | Supported | Supported |
-| `download_to_path` | Download to a local path | Supported | Supported |
-| `download_to_file` | Download to a binary file | Supported | Supported |
-| `download_stream` | Iterate content chunks | Supported | Supported |
-| `delete` | Delete one object | Supported | Supported |
-| `delete_objects` | Delete multiple objects | Supported | Supported |
-| `copy` | Copy to another bucket | Supported | Supported |
-| `copy_from` | Copy from another bucket | Supported | Supported |
-| `list_page` | List with prefix, delimiter, and pagination | Supported | Supported |
-| `does_object_exist` | Check object existence | Supported | Supported |
-| `does_bucket_exist` | Check bucket existence | Supported | Supported |
-| `get_metadata` | Read object metadata | Supported | Supported |
-| `get_tags` | Read tags | Supported | Supported |
-| `set_tags` | Replace tags | Supported | Supported |
-| `get_object_lock` | Read retention and legal hold | Supported | Supported |
-| `update_object_retention` | Update retention | Supported | Supported |
-| `update_legal_hold` | Update legal hold | Supported | Supported |
-| `generate_presigned_url` | Generate a signed upload or download URL | Supported | Supported |
-| `list_blob_versions` | List object versions | Supported | Supported |
-| `initiate_multipart_upload` | Start a multipart upload | Supported | Supported |
-| `upload_part` | Upload a part | Supported | Supported |
-| `complete_multipart_upload` | Complete a multipart upload | Supported | Supported |
-| `list_parts` | List uploaded parts | Supported | Supported |
-| `abort_multipart_upload` | Abort a multipart upload | Supported | Supported |
+## Blob Storage { #blob-storage }
 
-Read the [Blob Storage guide](guides/blobstore-guide.md) and
-[API reference](api/blob.md) for parameters and return types.
+[Usage guide](guides/blobstore-guide.md) · [API reference](api/blob.md)
 
-- Object lock requires appropriately configured resources and permissions.
-- Conditional writes differ: AWS rejects a standalone `if_version_match`;
-  GCP rejects a standalone `if_match` for writes. When both are supplied,
-  each provider uses its supported token and ignores the redundant one.
-- Version ordering is provider-native. Use `is_latest` or explicitly sort
-  `last_modified` when ordering matters.
-- Resource existence and operation availability do not imply an account has
-  permission to perform the operation.
+=== "Sync client"
 
-### Async Blob Storage (`AsyncBucketClient`)
+    `BucketClient` supports every operation below on AWS and GCP.
 
-The async client implements the same operation names listed above, plus the
-directory helpers below. Most operations are awaited; `list_blob_versions`
-returns an async iterator directly and is consumed with
-`async for version in client.list_blob_versions(key)`, without `await` on the
-iterator itself. Use `async with` for cleanup. The same provider preconditions
-and resource configuration requirements apply.
+    #### Upload, download, and copy
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `upload_directory` | Upload local directory contents | Supported | Supported |
-| `download_directory` | Download objects under a prefix | Supported | Supported |
-| `delete_directory` | Delete objects under a prefix | Supported | Supported |
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `upload` | Upload bytes or a binary stream | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `upload_from_path` | Upload from a local file | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download` | Download object content | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download_to_path` | Download to a local path | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download_to_file` | Download to a binary file | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download_stream` | Iterate content chunks | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `copy` | Copy to another bucket | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `copy_from` | Copy from another bucket | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `delete` | Delete one object | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `delete_objects` | Delete multiple objects | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-## STS (`StsClient`)
+    #### Listing and metadata
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `get_caller_identity` | Identify the caller | Supported | Conditional |
-| `assume_role` | Obtain temporary role credentials | Supported | Supported |
-| `get_access_token` | Obtain refreshed or scoped credentials | Conditional | Conditional |
-| `generate_service_account_token` | Impersonate a service account | Unsupported | Supported |
-| `assume_role_with_web_identity` | Exchange a web-identity token | Supported | Supported |
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `list_page` | List with prefix, delimiter, and pagination | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `list_blob_versions` | List object versions | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `does_object_exist` | Check object existence | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `does_bucket_exist` | Check bucket existence | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `get_metadata` | Read object metadata | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `get_tags` | Read tags | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `set_tags` | Replace tags | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `generate_presigned_url` | Generate a signed upload or download URL | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-GCP caller-identity and audience-targeted tokens require a compatible service
-account or impersonated credential; user OAuth credentials do not support these
-ID-token paths. Scoped GCP access tokens require a service-account email. AWS
-`get_access_token` uses session-token credentials and ignores `audience` and
-`scopes`. GCP `assume_role` impersonates a service account and ignores
-`session_name`, `external_id`, `policy`, and `tags`; its `credential_scope`
-path supports downscoping. Token lifetimes and trust/impersonation permissions remain
-provider-specific. See the [STS guide](guides/sts-guide.md).
+    #### Object protection
 
-### STS utilities (`StsUtilities`)
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `get_object_lock` | Read retention and legal hold | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `update_object_retention` | Update retention | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `update_legal_hold` | Update legal hold | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `create_signed_auth_request` | Create a signed caller-identity authentication request | Supported | Unsupported |
+    #### Multipart upload
 
-## IAM (`IamClient`)
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `initiate_multipart_upload` | Start a multipart upload | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `upload_part` | Upload a part | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `complete_multipart_upload` | Complete a multipart upload | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `list_parts` | List uploaded parts | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `abort_multipart_upload` | Abort a multipart upload | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `create_identity` | Create or resolve an identity | Supported | Supported |
-| `get_identity` | Read its identifier | Supported | Supported |
-| `delete_identity` | Delete an identity | Supported | Supported |
-| `attach_inline_policy` | Attach policy permissions | Supported | Conditional |
-| `get_inline_policy_details` | Read a policy document or binding | Supported | Conditional |
-| `get_attached_policies` | List attached policy names or roles | Supported | Conditional |
-| `remove_policy` | Remove policy permissions | Supported | Conditional |
+    #### Client lifecycle
 
-GCP represents policy attachments as project IAM role bindings, not named
-inline policy documents. Its attachment implementation applies ALLOW statements;
-DENY statements are skipped, conditions on translated ALLOW statements are
-rejected, and statement resources do not restrict the binding. Do not use
-resource entries to constrain access on GCP. Policy lookup/removal uses role names such as
-`roles/storage.objectViewer`, rather than the original `PolicyDocument.name`.
-Creation options and trust configuration also have provider-specific effects.
-See the [IAM guide](guides/iam-guide.md) for the mapping and examples.
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `close` | Release client resources | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-## PubSub (`TopicClient` / `SubscriptionClient`)
+    Use `with` for automatic client cleanup.
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `send` | Publish a message (TopicClient) | Supported | Supported |
-| `receive` | Receive a message (SubscriptionClient) | Supported | Supported |
-| `send_ack` | Acknowledge one message | Supported | Supported |
-| `send_acks` | Batch acknowledgments; returns a Future | Supported | Supported |
-| `send_nack` | Make one message available for redelivery | Supported | Supported |
-| `send_nacks` | Batch negative acknowledgments; returns a Future | Supported | Supported |
-| `can_nack` | Check negative-acknowledgment capability | Supported | Supported |
-| `get_attributes` | Read subscription metadata | Supported | Supported |
-| `is_retryable` | Classify a failure for retry | Supported | Supported |
+=== "Async client"
 
-These operations are implemented, rather than merely defined as interfaces.
-AWS publishing selects `awssns` or `awssqs`; AWS subscriptions use `aws`.
-GCP uses `gcp`. Negative acknowledgments and visibility/deadline limits follow
-provider semantics. `get_attributes` does not guarantee a backlog count: the
-current implementations leave `approximate_number_of_messages` unset.
-`is_retryable` classifies an error; it does not promise automatic retry of
-every failed operation. See the [Pub/Sub guide](guides/pubsub-guide.md).
+    `AsyncBucketClient` supports every operation below on AWS and GCP.
 
-## Document Store (`DocStoreClient`)
+    #### Upload, download, and copy
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `actions` | Build a list of document actions | Supported | Supported |
-| `create` | Create a document | Supported | Supported |
-| `replace` | Replace an existing document | Supported | Supported |
-| `put` | Upsert a document | Supported | Supported |
-| `delete` | Delete a document | Supported | Supported |
-| `get` | Read into a supplied document | Supported | Supported |
-| `batch_get` | Read multiple documents | Supported | Supported |
-| `batch_put` | Upsert multiple documents | Supported | Supported |
-| `batch_delete` | Delete multiple documents | Supported | Supported |
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `upload` | Upload bytes or a binary stream | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `upload_from_path` | Upload from a local file | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download` | Download object content | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download_to_path` | Download to a local path | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download_to_file` | Download to a binary file | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download_stream` | Iterate content chunks | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `copy` | Copy to another bucket | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `copy_from` | Copy from another bucket | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `delete` | Delete one object | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `delete_objects` | Delete multiple objects | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-### Action-list interface (`ActionList`)
+    #### Listing and metadata
 
-| API | Description | AWS | GCP |
-| --- | --- | --- | --- |
-| `create` | Queue a create | Supported | Supported |
-| `replace` | Queue a replacement | Supported | Supported |
-| `put` | Queue an upsert | Supported | Supported |
-| `delete` | Queue a delete | Supported | Supported |
-| `get` | Queue a read with optional field paths | Supported | Supported |
-| `enable_atomic_writes` | Request transactional writes | Supported | Supported |
-| `before_do` | Register a before-operation hook | Supported | Supported |
-| `run` | Execute the action list | Supported | Supported |
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `list_page` | List with prefix, delimiter, and pagination | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `list_blob_versions` | List object versions | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `does_object_exist` | Check object existence | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `does_bucket_exist` | Check bucket existence | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `get_metadata` | Read object metadata | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `get_tags` | Read tags | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `set_tags` | Replace tags | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `generate_presigned_url` | Generate a signed upload or download URL | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-Revision checks, supported field shapes, transaction limits, and atomic-write
-constraints depend on the provider. Query/filter/order/pagination APIs are
-**not exposed** by this public `DocStoreClient`; package presence is not full
-query-feature parity. See the [DocStore API reference](api/docstore.md).
+    #### Object protection
 
-## Shared client interfaces
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `get_object_lock` | Read retention and legal hold | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `update_object_retention` | Update retention | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `update_legal_hold` | Update legal hold | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-All clients above expose `close` and context-manager cleanup. Client properties
-such as provider, region, resource name, or the DocStore driver handle are
-accessors rather than additional cloud operations. The [API reference](api/index.md)
-contains complete signatures and the shared models and exception hierarchy.
+    #### Multipart upload
 
-## Remaining work
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `initiate_multipart_upload` | Start a multipart upload | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `upload_part` | Upload a part | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `complete_multipart_upload` | Complete a multipart upload | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `list_parts` | List uploaded parts | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `abort_multipart_upload` | Abort a multipart upload | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
 
-- Implement the planned Ali providers; placeholder distributions do not provide
-  working operations.
-- Extend public DocStore functionality and its integration coverage before
-  documenting query/filter/pagination support as available.
-- Keep this inventory and the service guides aligned with implemented behavior
-  as source changes merge. New services and dates should be added only when
-  there is an agreed plan; the previous July 2026 targets are not current status.
+    #### Directory operations
+
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `upload_directory` | Upload local directory contents | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `download_directory` | Download objects under a prefix | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+    | `delete_directory` | Delete objects under a prefix | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+
+    #### Client lifecycle
+
+    | API | Purpose | AWS | GCP |
+    | --- | --- | :---: | :---: |
+    | `close` | Release client resources | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+
+    Await coroutine operations and use `async with` for cleanup.
+    `list_blob_versions()` returns an async iterator directly:
+
+    ```python
+    async for version in client.list_blob_versions("report.pdf"):
+        print(version.version_id)
+    ```
+
+??? info "Blob Storage provider notes"
+
+    Object protection needs appropriate resource configuration and permissions.
+    AWS uses ETag write matching and GCP uses generation/version matching. A
+    standalone unsupported token raises an error; when both `if_match` and
+    `if_version_match` are supplied, each provider uses its supported token.
+    Version ordering remains provider-native; use `is_latest` or sort explicitly.
+
+## STS { #sts }
+
+`StsClient` provides identity and temporary-credential operations.
+[Usage guide](guides/sts-guide.md) · [API reference](api/sts.md)
+
+| API | Purpose | AWS | GCP |
+| --- | --- | :---: | :---: |
+| `get_caller_identity` | Identify the caller | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `assume_role` | Obtain temporary role credentials | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `get_access_token` | Obtain refreshed or scoped credentials | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `generate_service_account_token` | Impersonate a service account | <span class="api-support api-support--no" title="Unsupported"><span aria-hidden="true">—</span><span class="support-label">Unsupported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `assume_role_with_web_identity` | Exchange a web-identity token | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `close` | Release client resources | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+
+`StsUtilities` exposes the following additional operation:
+
+| API | Purpose | AWS | GCP |
+| --- | --- | :---: | :---: |
+| `create_signed_auth_request` | Create a signed caller-identity authentication request | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--no" title="Unsupported"><span aria-hidden="true">—</span><span class="support-label">Unsupported</span></span> |
+
+??? info "STS provider notes"
+
+    All operations marked supported have implementations. Credential types,
+    permissions, and token parameters are prerequisites, not a separate support
+    level. GCP identity/audience tokens need compatible service-account or
+    impersonated credentials; scoped tokens need a service-account email.
+
+    AWS `get_access_token` uses session tokens and ignores `audience` and
+    `scopes`. GCP `assume_role` impersonates a service account and ignores
+    `session_name`, `external_id`, `policy`, and `tags`; use the implemented
+    `credential_scope` path for downscoping. Token lifetimes remain provider-specific.
+
+    AWS `generate_service_account_token` and GCP
+    `create_signed_auth_request` explicitly raise `UnsupportedOperationException`.
+    These are the two unsupported provider paths shown above.
+
+## IAM { #iam }
+
+`IamClient` manages identities and permissions.
+[Usage guide](guides/iam-guide.md) · [API reference](api/iam.md)
+
+| API | Purpose | AWS | GCP |
+| --- | --- | :---: | :---: |
+| `create_identity` | Create or resolve an identity | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `get_identity` | Read its identifier | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `delete_identity` | Delete an identity | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `attach_inline_policy` | Attach policy permissions | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `get_inline_policy_details` | Read a policy document or binding | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `get_attached_policies` | List attached policy names or roles | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `remove_policy` | Remove policy permissions | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `close` | Release client resources | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+
+??? info "IAM provider notes"
+
+    All listed IAM APIs are implemented. Their policy representations differ:
+    AWS uses named inline policies; GCP uses project-level role bindings.
+    On GCP, lookup/removal uses role names such as `roles/storage.objectViewer`.
+
+    GCP applies ALLOW statements, skips DENY statements, rejects conditions on
+    translated ALLOW statements, and does not use statement resources to restrict
+    the binding. Read the IAM guide before applying a policy: the same method
+    name does not guarantee equivalent policy semantics on every provider.
+
+## Pub/Sub { #pubsub }
+
+Publish with `TopicClient`; receive and acknowledge with `SubscriptionClient`.
+[Usage guide](guides/pubsub-guide.md) · [API reference](api/pubsub.md)
+
+| API | Purpose | AWS | GCP |
+| --- | --- | :---: | :---: |
+| `send` | Publish a message (TopicClient) | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `receive` | Receive a message (SubscriptionClient) | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `send_ack` | Acknowledge one message | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `send_acks` | Batch acknowledgments; returns a Future | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `send_nack` | Make one message available for redelivery | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `send_nacks` | Batch negative acknowledgments; returns a Future | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `can_nack` | Check negative-acknowledgment capability | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `get_attributes` | Read subscription metadata | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `is_retryable` | Classify a failure for retry | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `close` | Flush pending work and release the client | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+
+??? info "Pub/Sub provider notes"
+
+    AWS publishing selects `awssns` or `awssqs`; AWS subscriptions use `aws`.
+    GCP uses `gcp`. Both clients expose `close`; the other rows identify their
+    relevant client. Batch acknowledgments return Futures whose results should
+    be observed. Redelivery follows provider visibility/deadline limits.
+
+    The current `get_attributes` implementations leave
+    `approximate_number_of_messages` unset. `is_retryable` classifies errors;
+    it does not promise to retry every failed operation.
+
+## Document Store { #document-store }
+
+`DocStoreClient` supports document operations and batching through `actions()`.
+[API reference](api/docstore.md)
+
+| API | Purpose | AWS | GCP |
+| --- | --- | :---: | :---: |
+| `actions` | Build a list of document actions | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `create` | Create a document | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `replace` | Replace an existing document | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `put` | Upsert a document | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `delete` | Delete a document | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `get` | Read into a supplied document | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `batch_get` | Read multiple documents | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `batch_put` | Upsert multiple documents | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `batch_delete` | Delete multiple documents | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+| `close` | Release client resources | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> | <span class="api-support api-support--yes" title="Supported"><span aria-hidden="true">✓</span><span class="support-label">Supported</span></span> |
+
+??? info "Batching within DocStoreClient"
+
+    `actions()` returns a fluent builder within the DocStore API. Chain
+    `create`, `replace`, `put`, `delete`, or `get` and execute with `run()`.
+    `enable_atomic_writes()` requests transactional writes, and `before_do()`
+    registers a before-operation hook. These belong to DocStore batching,
+    rather than a separate service interface.
+
+    Revision checks, supported field shapes, and transaction limits depend on
+    the provider. Query/filter/order/pagination APIs are not exposed by the
+    current public `DocStoreClient`.
+
+</div>
+
+Ali provider distributions for Blob Storage, STS, and Pub/Sub remain placeholders.
+The tables show the implemented AWS and GCP providers. Reviewed October 22, 2026.
