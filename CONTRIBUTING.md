@@ -75,8 +75,8 @@ retitle them before merging.
 The `main` ruleset requires one eligible review, resolved review threads, and
 successful CI, documentation, security, and CLA checks. New changes dismiss old
 approvals. Maintainers add `conventional-title` to the required checks after
-the title workflow has merged and produced its first check; do not require a
-check that cannot run yet. Code-owner review is a separate policy and is not
+the new workflow has produced a successful check on its implementing PR; do not
+require a check that cannot run yet. Code-owner review is a separate policy and is not
 enabled merely by adding a CODEOWNERS file. The title workflow uses the same
 read-only `pull_request` execution model as CI; it has no publishing credentials
 or write permissions.
